@@ -21,8 +21,8 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=dev@localhost
       - PGADMIN_DEFAULT_PASSWORD=password
-  dj:
-    container_name: backend-skeleton
+  dj-dividend:
+    container_name: dividend
     build: backend
     command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:80"
     environment:
