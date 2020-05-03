@@ -14,6 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { HomeComponent } from './views/home/home.component';
 import { ResultsComponent } from './views/home/results/results.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatStepperModule} from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatProgressSpinnerModule,
     HttpClientModule,
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

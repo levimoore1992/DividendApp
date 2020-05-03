@@ -1,9 +1,11 @@
 .main{
-  display: flex;
-  justify-content: center;
+
   margin-top: 50px;
 }
 
+.spinner{
+  width: 100%;
+}
 
 .stockForm{
   display: flex;
@@ -12,4 +14,11 @@
 
 .card{
   width: 500px;
+
+}
+
+.submit-button{
+  width: 25%;
+  display: flex;
+  justify-content: center;
 }

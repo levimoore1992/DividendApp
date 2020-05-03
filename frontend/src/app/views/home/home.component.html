@@ -1,22 +1,28 @@
 <div class="main">
-  <mat-tab-group>
-    <mat-tab label="Enter Stock">
-        <mat-card *ngIf="!submitted" class="card">
+  <mat-horizontal-stepper linear="true">
+    <mat-step [stepControl]="stockForm" label="Enter Stock">
+        <mat-card class="card">
     <mat-card-title>
       Enter Stock Ticker
     </mat-card-title>
-    <form [formGroup]="stockForm" class="stockForm">
+                <form [formGroup]="stockForm" class="stockForm">
       <mat-form-field>
       <input type="text" matInput formControlName="ticker">
     </mat-form-field>
-            <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+            <button mat-raised-button color="primary" (click)="submit()" class="submit-button">
+              <span *ngIf="!loading">Submit</span>
+              <mat-spinner *ngIf="loading" class="spinner" color="accent" [diameter]="30"></mat-spinner>
+            </button>
     </form>
+
   </mat-card>
-    </mat-tab>
-    <mat-tab label="Results">
-      <app-results [stockData]="stockData"></app-results>
-    </mat-tab>
-  </mat-tab-group>
+    </mat-step>
+    <mat-step label="Results" [completed]="isSubmitted">
+      <ng-template>
+            <app-results [stockData]="stockData"></app-results>
+      </ng-template>
+    </mat-step>
+  </mat-horizontal-stepper>
 
 
 </div>

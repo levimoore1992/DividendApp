@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StockService} from '../../stock.service';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,10 @@ import {StockService} from '../../stock.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  @ViewChild(MatStepper, {static: true}) stepper: MatStepper;
   stockData: {name: string, shares_needed: number, investment_needed: number };
   stockForm: FormGroup;
-  submitted = false;
+  isSubmitted = false;
   loading = false;
 
   constructor(private fb: FormBuilder, private stockService: StockService) {}
@@ -23,7 +24,6 @@ export class HomeComponent implements OnInit {
   }
 
   submit() {
-    this.submitted = true;
     this.loading = true;
     const payload = {
       ticker: this.stockForm.get('ticker').value
@@ -33,7 +33,10 @@ export class HomeComponent implements OnInit {
       // @ts-ignore
       this.stockData = res;
       this.loading = false;
+      this.isSubmitted = true;
+      this.stepper.next();
     });
+
   }
 
 }
