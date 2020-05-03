@@ -1,2 +1,21 @@
-<p>Welcome to the first page</p>
-<p>Next line</p>
+<div class="main">
+  <mat-card *ngIf="!submitted" class="card">
+    <mat-card-title>
+      Enter Stock Ticker
+    </mat-card-title>
+    <form [formGroup]="stockForm" class="stockForm">
+      <mat-form-field>
+      <input type="text" matInput formControlName="ticker">
+    </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+
+    </form>
+  </mat-card>
+  <mat-card *ngIf="submitted">
+      <mat-spinner *ngIf="loading"></mat-spinner>
+
+      <div class="results" *ngIf="!loading">
+        <p>For stock {{stockData.name}} you will need {{stockData.shares_needed}} shares with a total investment of {{stockData.investment_needed}}</p>
+      </div>
+  </mat-card>
+</div>
