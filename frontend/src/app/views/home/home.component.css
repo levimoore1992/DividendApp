@@ -1,7 +1,4 @@
-.main{
 
-  margin-top: 50px;
-}
 
 .spinner{
   width: 100%;
@@ -10,10 +7,14 @@
 .stockForm{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card{
-  width: 500px;
+  width: 25%;
+  margin-right: auto;
+  margin-left: auto;
 
 }
 

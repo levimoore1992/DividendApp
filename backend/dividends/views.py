@@ -28,4 +28,5 @@ class DividendViewSet(APIView):
                             price=price, shares_needed=shares_needed,
                             investment_needed=investment_needed)
         stock_model.save()
-        return Response({'name': name, 'shares_needed': shares_needed, 'investment_needed': investment_needed})
+        return Response({'name': name, 'shares_needed': round(shares_needed),
+                         'investment_needed': round(investment_needed)})

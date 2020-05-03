@@ -1,4 +1,3 @@
-<div class="main">
   <mat-horizontal-stepper linear="true">
     <mat-step [stepControl]="stockForm" label="Enter Stock">
         <mat-card class="card">
@@ -7,6 +6,7 @@
     </mat-card-title>
                 <form [formGroup]="stockForm" class="stockForm">
       <mat-form-field>
+        <mat-label>Stock Ticker</mat-label>
       <input type="text" matInput formControlName="ticker">
     </mat-form-field>
             <button mat-raised-button color="primary" (click)="submit()" class="submit-button">
@@ -22,5 +22,3 @@
     </mat-step>
   </mat-horizontal-stepper>
 
-
-</div>
