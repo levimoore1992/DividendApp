@@ -18,9 +18,7 @@
   </mat-card>
     </mat-step>
     <mat-step label="Results" [completed]="isSubmitted">
-      <ng-template>
-            <app-results [stockData]="stockData"></app-results>
-      </ng-template>
+            <app-results *ngIf="isSubmitted" [stockData]="stockData"></app-results>
     </mat-step>
   </mat-horizontal-stepper>
 
