@@ -1,0 +1,22 @@
+<div class="main">
+  <mat-tab-group>
+    <mat-tab label="Enter Stock">
+        <mat-card *ngIf="!submitted" class="card">
+    <mat-card-title>
+      Enter Stock Ticker
+    </mat-card-title>
+    <form [formGroup]="stockForm" class="stockForm">
+      <mat-form-field>
+      <input type="text" matInput formControlName="ticker">
+    </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submit()">Submit</button>
+    </form>
+  </mat-card>
+    </mat-tab>
+    <mat-tab label="Results">
+      <app-results [stockData]="stockData"></app-results>
+    </mat-tab>
+  </mat-tab-group>
+
+
+</div>
