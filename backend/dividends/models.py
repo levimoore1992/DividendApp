@@ -8,3 +8,6 @@ class Stock(models.Model):
     price = models.FloatField(round(2))
     shares_needed = models.IntegerField(round(0))
     investment_needed = models.IntegerField(round(0))
+
+    def __str__(self):
+        return self.stock_name
