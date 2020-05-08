@@ -1,5 +1,10 @@
-  <mat-card>
-      <div class="results">
+<mat-card>
+  <mat-spinner *ngIf="loading"></mat-spinner>
+      <div *ngIf="!loading">
+        <div class="results" *ngIf="!error">
         <p>For stock {{stockData.name}} you will need {{stockData.shares_needed}} shares with a total investment of {{stockData.investment_needed}}</p>
       </div>
+      <mat-error *ngIf="error">{{error}}</mat-error>
+      </div>
+
   </mat-card>

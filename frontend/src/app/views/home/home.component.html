@@ -1,24 +1,29 @@
-  <mat-horizontal-stepper linear="true">
-    <mat-step [stepControl]="stockForm" label="Enter Stock">
-        <mat-card class="card">
-    <mat-card-title>
-      Enter Stock Ticker
-    </mat-card-title>
-                <form [formGroup]="stockForm" class="stockForm">
-      <mat-form-field>
-        <mat-label>Stock Ticker</mat-label>
-      <input type="text" matInput formControlName="ticker">
-    </mat-form-field>
-            <button mat-raised-button color="primary" (click)="submit()" class="submit-button">
-              <span *ngIf="!loading">Submit</span>
-              <mat-spinner *ngIf="loading" class="spinner" color="accent" [diameter]="30"></mat-spinner>
+<mat-horizontal-stepper linear="true">
+  <mat-step [stepControl]="stockForm" label="Enter Stock">
+    <mat-card class="card">
+      <mat-card-title>
+        Enter Stock Ticker
+      </mat-card-title>
+      <form [formGroup]="stockForm" class="stockForm">
+        <div formArrayName="tickers">
+          <div *ngFor="let item of tickers.controls; let tickerIndex = index" [formGroupName]="tickerIndex">
+            <mat-form-field>
+              <mat-label>Stock Ticker</mat-label>
+              <input type="text" matInput formControlName="ticker" />
+            </mat-form-field>
+            <button mat-raised-button color="warn" (click)="deleteInput(tickerIndex)">
+              <mat-icon>close</mat-icon>
             </button>
-    </form>
-
-  </mat-card>
-    </mat-step>
-    <mat-step label="Results" [completed]="isSubmitted">
-            <app-results *ngIf="isSubmitted" [stockData]="stockData"></app-results>
-    </mat-step>
-  </mat-horizontal-stepper>
-
+          </div>
+        </div>
+        <button mat-raised-button (click)="addInput()">Add Ticker</button>
+        <button mat-raised-button color="primary" (click)="submit()" class="submit-button">Submit</button>
+      </form>
+    </mat-card>
+  </mat-step>
+  <mat-step label="Results" [completed]="isSubmitted">
+    <div *ngIf="isSubmitted">
+      <app-results *ngFor="let ticker of tickers.value" [ticker]="ticker"></app-results>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

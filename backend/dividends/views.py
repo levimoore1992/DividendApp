@@ -19,7 +19,7 @@ class DividendViewSet(APIView):
             name = stock.info['shortName']
         except Exception as e:
             print(e)
-            return Response({'error': f"{ticker} does not have all the info"})
+            return Response({'error': f"This stock does not have all the info"})
 
         shares_needed = 1200 / dividend_rate
 

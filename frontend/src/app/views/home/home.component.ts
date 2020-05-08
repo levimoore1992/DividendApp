@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StockService} from '../../stock.service';
 import {MatStepper} from '@angular/material/stepper';
 
@@ -10,33 +10,32 @@ import {MatStepper} from '@angular/material/stepper';
 })
 export class HomeComponent implements OnInit {
   @ViewChild(MatStepper, {static: true}) stepper: MatStepper;
-  stockData: {name: string, shares_needed: number, investment_needed: number };
   stockForm: FormGroup;
   isSubmitted = false;
-  loading = false;
 
   constructor(private fb: FormBuilder, private stockService: StockService) {}
 
   ngOnInit(): void {
     this.stockForm = this.fb.group({
-      ticker: ['', Validators.required]
+      tickers: this.fb.array([this.fb.group({ticker: ''})])
     });
   }
 
   submit() {
-    this.loading = true;
-    const payload = {
-      ticker: this.stockForm.get('ticker').value
-    };
-
-    this.stockService.postStock(payload).subscribe(res => {
-      // @ts-ignore
-      this.stockData = res;
-      this.loading = false;
-      this.isSubmitted = true;
-      this.stepper.next();
-    });
+  this.isSubmitted = true;
+  this.stepper.next();
 
   }
 
+  get tickers() {
+    return this.stockForm.get('tickers') as FormArray;
+  }
+
+  addInput() {
+    this.tickers.push(this.fb.group({ticker: ''}));
+  }
+
+  deleteInput(tickerIndex: number) {
+    this.tickers.removeAt(tickerIndex);
+  }
 }
