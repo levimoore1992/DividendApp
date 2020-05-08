@@ -15,6 +15,7 @@ import { HomeComponent } from './views/home/home.component';
 import { ResultsComponent } from './views/home/results/results.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatStepperModule} from "@angular/material/stepper";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     HttpClientModule,
     MatToolbarModule,
     MatTabsModule,
-    MatStepperModule
+    MatStepperModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
