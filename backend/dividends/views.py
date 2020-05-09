@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import TickerSerializer
 from .models import Stock
+
+
 class DividendViewSet(APIView):
 
     def post(self, request, *args, **kwargs):
@@ -11,7 +13,7 @@ class DividendViewSet(APIView):
         if serializer.is_valid():
             ticker = serializer.validated_data
         else:
-            return Response({'error':'Failed during serialization'})
+            return Response({'error': 'Failed during serialization'})
         stock = yf.Ticker(ticker['ticker'])
         try:
             dividend_rate = float(stock.info['dividendRate'])
@@ -30,3 +32,14 @@ class DividendViewSet(APIView):
         stock_model.save()
         return Response({'name': name, 'shares_needed': round(shares_needed),
                          'investment_needed': round(investment_needed)})
+
+
+class DividendListViewSet(APIView):
+
+    def get(self, request, *args, **kwargs):
+        stocks = Stock.objects.all().values()
+
+        return Response(stocks)
+
+    def post(self):
+        pass

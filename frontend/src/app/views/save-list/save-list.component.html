@@ -1,0 +1,13 @@
+<mat-selection-list>
+  <mat-list-option *ngFor="let stock of stocks">
+    {{stock.stock_name}}, {{stock.investment_needed}}
+  </mat-list-option>
+</mat-selection-list>
+
+<form [formGroup]="stockSaveForm" class="stock-save-form">
+  <mat-form-field>
+    <mat-label>Enter Stock Ticker</mat-label>
+    <input type="text" matInput formControlName="ticker">
+  </mat-form-field>
+  <button mat-raised-button>Save Stock</button>
+</form>

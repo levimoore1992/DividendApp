@@ -16,13 +16,16 @@ import { ResultsComponent } from './views/home/results/results.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatIconModule} from "@angular/material/icon";
+import { SaveListComponent } from './views/save-list/save-list.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ResultsComponent
+    ResultsComponent,
+    SaveListComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatToolbarModule,
     MatTabsModule,
     MatStepperModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
