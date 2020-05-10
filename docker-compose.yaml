@@ -49,7 +49,7 @@ services:
 
   celery:
     build: .
-    command: celery -A backend worker --beat scheduler django_celery_beat.schedulers:DatabaseScheduler -l info
+    command: celery -A dividends worker --beat --scheduler django_celery_beat.schedulers:DatabaseScheduler -l info
     depends_on:
       - redis
       - db
