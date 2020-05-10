@@ -121,9 +121,9 @@ STATIC_URL = '/static/'
 #Celery
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
-CELRY_BEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
     "GetStock": {
         'task': 'backend.tasks.get_stocks',
-        'scheudle': crontab(minute="*/60") #every hour
+        'scheudle': crontab(minute="*/1") #every hour
     }
 }
