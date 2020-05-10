@@ -9,5 +9,6 @@
     <mat-label>Enter Stock Ticker</mat-label>
     <input type="text" matInput formControlName="ticker">
   </mat-form-field>
-  <button mat-raised-button>Save Stock</button>
+  <mat-error *ngIf="error">{{error}}</mat-error>
+  <button mat-raised-button (click)="saveStock()">Save Stock</button>
 </form>

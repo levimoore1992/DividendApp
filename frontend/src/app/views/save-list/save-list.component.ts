@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class SaveListComponent implements OnInit {
   stocks: [{stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number}];
   stockSaveForm: FormGroup;
+  error: string;
   constructor(private stockService: StockListService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -19,16 +20,33 @@ export class SaveListComponent implements OnInit {
 
 
     this.stockService.getList().subscribe(res => {
-      console.log(res)
+      console.log(res);
       // @ts-ignore
       this.stocks = res;
     });
   }
 
-  saveStock(stock) {
-    this.stockService.saveStock(stock).subscribe(res => {
+  get ticker() {
+    return this.stockSaveForm.get('ticker').value;
+  }
+
+  saveStock() {
+    this.error = null;
+
+    const payload = {
+      ticker: this.ticker
+    };
+
+    this.stockService.saveStock(payload).subscribe(res => {
+
       // @ts-ignore
+      if (res.error) {
+        this.error = 'We werent able to get or update that stock';
+      } else {
+              // @ts-ignore
       this.stocks.push(res);
+      }
+
     });
   }
 

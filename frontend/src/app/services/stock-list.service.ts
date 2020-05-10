@@ -14,6 +14,6 @@ export class StockListService {
   }
 
   saveStock(payload) {
-    return this.http.post('http://localhost:80/api/save-list', payload);
+    return this.http.post('http://127.0.0.1:80/api/dividends', payload);
   }
 }

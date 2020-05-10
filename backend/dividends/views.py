@@ -22,7 +22,6 @@ class DividendViewSet(APIView):
             price = float(stock.info['ask'])
             name = stock.info['shortName']
         except Exception as e:
-            print(e)
             return Response({'error': f"This stock does not have all the info"})
 
         shares_needed = 1200 / dividend_rate
@@ -38,7 +37,7 @@ class DividendViewSet(APIView):
         else:
             created.save()
 
-        return Response({'name': name, 'shares_needed': round(shares_needed),
+        return Response({'stock_name': name, 'shares_needed': round(shares_needed),
                          'investment_needed': round(investment_needed)})
 
 
