@@ -18,7 +18,7 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatIconModule} from "@angular/material/icon";
 import { SaveListComponent } from './views/save-list/save-list.component';
 import {MatListModule} from "@angular/material/list";
-import {BodyModule, GridModule, SharedModule} from '@progress/kendo-angular-grid';
+import {BodyModule, ExcelModule, GridModule, SharedModule} from '@progress/kendo-angular-grid';
 
 
 @NgModule({
@@ -47,7 +47,8 @@ import {BodyModule, GridModule, SharedModule} from '@progress/kendo-angular-grid
     GridModule,
     SharedModule,
     BodyModule,
-    FormsModule
+    FormsModule,
+    ExcelModule
   ],
   providers: [],
   bootstrap: [AppComponent]

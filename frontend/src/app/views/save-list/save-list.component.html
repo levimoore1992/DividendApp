@@ -8,6 +8,9 @@
   (sortChange)="sortChange($event)"
   *ngIf="!loading"
 >
+<ng-template kendoGridToolbarTemplate>
+<button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
+</ng-template>
   <kendo-grid-column field="stock_name" title="Name"></kendo-grid-column>
   <kendo-grid-column field="price" title="Price"></kendo-grid-column>
   <kendo-grid-column field="investment_needed" title="Investment Needed">
@@ -22,9 +25,10 @@
   </kendo-grid-column>
 
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
+  <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
+
 </kendo-grid>
 <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
-
 
 
 
@@ -39,3 +43,5 @@
   <mat-error *ngIf="error">{{error}}</mat-error>
   <button mat-raised-button (click)="saveStock()">Save Stock</button>
 </form>
+
+
