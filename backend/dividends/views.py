@@ -1,10 +1,10 @@
+import yfinance as yf
 from rest_framework.response import Response
 
 from rest_framework.views import APIView
-
-from dividends.utils import get_stock_data
 from .serializers import TickerSerializer
 from .models import Stock
+
 
 class DividendViewSet(APIView):
 
@@ -15,10 +15,30 @@ class DividendViewSet(APIView):
             ticker = serializer.validated_data
         else:
             return Response({'error': 'Failed during serialization'})
+        stock = yf.Ticker(ticker['ticker'])
 
-        response = get_stock_data(ticker['ticker'])
+        try:
+            dividend_rate = float(stock.info['dividendRate'])
+            price = float(stock.info['ask'])
+            name = stock.info['shortName']
+        except Exception as e:
+            return Response({'error': f"This stock does not have all the info"})
 
-        return Response(response)
+        shares_needed = 1200 / dividend_rate
+
+        investment_needed = shares_needed * price
+        stock_model, created = Stock.objects.update_or_create(stock_name=name,
+                                                              defaults={'dividend': dividend_rate,
+                                                                        'price': price,
+                                                                        'shares_needed': shares_needed,
+                                                                        'investment_needed': investment_needed})
+        if stock_model:
+            stock_model.save()
+        else:
+            created.save()
+
+        return Response({'stock_name': name, 'shares_needed': round(shares_needed),
+                         'investment_needed': round(investment_needed)})
 
 
 class DividendListViewSet(APIView):
@@ -28,3 +48,5 @@ class DividendListViewSet(APIView):
 
         return Response(stocks)
 
+    def post(self):
+        pass

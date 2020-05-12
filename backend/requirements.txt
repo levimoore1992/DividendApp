@@ -4,6 +4,3 @@ psycopg2
 django-cors-headers
 yfinance
 lxml
-celery
-django-celery-beat
-redis
