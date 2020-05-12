@@ -36,6 +36,7 @@ export class SaveListComponent implements OnInit {
 
 
     this.stockSaveForm = this.fb.group({
+      profitWanted: ['', Validators.required],
       ticker: ['', Validators.required]
     });
 
