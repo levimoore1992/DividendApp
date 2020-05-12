@@ -27,13 +27,11 @@
 
 <div class="profit-wanted">
   <input class="form__input" type="number" [(ngModel)]="profitWanted" placeholder="Amount of dividends per year" id =profit>
-    <label for="profit" class="form__label">Expected Dividends</label>
-
+  <label for="profit" class="form__label">Expected Dividends</label>
 </div>
 
 
 <form [formGroup]="stockSaveForm" class="stock-save-form">
-
   <mat-form-field>
     <mat-label>Enter Stock Ticker</mat-label>
     <input type="text" matInput formControlName="ticker">
