@@ -1,8 +1,19 @@
-<mat-selection-list>
-  <mat-list-option *ngFor="let stock of stocks">
-    {{stock.stock_name}}, {{stock.investment_needed}}
-  </mat-list-option>
-</mat-selection-list>
+<kendo-grid
+  [data]="gridView"
+  [sort]="sort"
+  [sortable]="{
+  allowUnsort: true,
+  mode: multiple ? 'multiple' : 'single'
+  }"
+  (sortChange)="sortChange($event)"
+  *ngIf="!loading"
+>
+  <kendo-grid-column field="stock_name" title="Name"></kendo-grid-column>
+  <kendo-grid-column field="price" title="Price"></kendo-grid-column>
+  <kendo-grid-column field="investment_needed" title="Investment Needed"></kendo-grid-column>
+  <kendo-grid-column field="shares_needed" title="Shares Needed"></kendo-grid-column>
+</kendo-grid>
+<mat-spinner *ngIf="loading"></mat-spinner>
 
 <form [formGroup]="stockSaveForm" class="stock-save-form">
   <mat-form-field>

@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dividends',
-    'rest_framework'
+    'rest_framework',
+    'django_crontab',
+    'background_task'
 
 ]
 CORS_ORIGIN_ALLOW_ALL = True
@@ -127,3 +129,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+CRONJOBS = [
+    ('* * * * *', 'dividends.cron.get_stock')
+]
