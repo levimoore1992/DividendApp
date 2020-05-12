@@ -13,7 +13,7 @@
   <kendo-grid-column field="investment_needed" title="Investment Needed"></kendo-grid-column>
   <kendo-grid-column field="shares_needed" title="Shares Needed"></kendo-grid-column>
 </kendo-grid>
-<mat-spinner *ngIf="loading"></mat-spinner>
+<mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 
 <form [formGroup]="stockSaveForm" class="stock-save-form">
   <mat-form-field>
