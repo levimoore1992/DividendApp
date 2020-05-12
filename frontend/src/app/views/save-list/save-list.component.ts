@@ -26,7 +26,6 @@ export class SaveListComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.stockService.getList().subscribe(res => {
-      console.log(res)
       // @ts-ignore
       this.stocks = res;
       this.loadStocks();
