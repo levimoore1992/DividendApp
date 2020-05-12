@@ -17,7 +17,7 @@ export class ResultsComponent implements OnInit {
   ngOnInit(): void {
 
     this.loading = true;
-    const payload = this.ticker; // {ticker:'ARR'}
+    const payload = this.ticker;
     this.stockService.postStock(payload).subscribe(res => {
       // @ts-ignore
       if (res.error) {

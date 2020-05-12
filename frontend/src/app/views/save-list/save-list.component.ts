@@ -20,11 +20,13 @@ export class SaveListComponent implements OnInit {
   error: string;
   gridView: GridDataResult;
   loading;
+  profitWanted: number;
   constructor(private stockService: StockListService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.loading = true;
     this.stockService.getList().subscribe(res => {
+      console.log(res)
       // @ts-ignore
       this.stocks = res;
       this.loadStocks();

@@ -10,13 +10,30 @@
 >
   <kendo-grid-column field="stock_name" title="Name"></kendo-grid-column>
   <kendo-grid-column field="price" title="Price"></kendo-grid-column>
-  <kendo-grid-column field="investment_needed" title="Investment Needed"></kendo-grid-column>
-  <kendo-grid-column field="shares_needed" title="Shares Needed"></kendo-grid-column>
+  <kendo-grid-column field="investment_needed" title="Investment Needed">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+      {{ dataItem.price * (profitWanted / dataItem.dividend) | number}}
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="shares_needed" title="Shares Needed">
+      <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+    {{profitWanted / dataItem.dividend | number}}
+  </ng-template>
+  </kendo-grid-column>
+
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
 </kendo-grid>
 <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 
+<div class="profit-wanted">
+  <input class="form__input" type="number" [(ngModel)]="profitWanted" placeholder="Amount of dividends per year" id =profit>
+    <label for="profit" class="form__label">Expected Dividends</label>
+
+</div>
+
+
 <form [formGroup]="stockSaveForm" class="stock-save-form">
+
   <mat-form-field>
     <mat-label>Enter Stock Ticker</mat-label>
     <input type="text" matInput formControlName="ticker">
