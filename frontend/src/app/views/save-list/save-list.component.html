@@ -48,7 +48,20 @@
   <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
 <ng-template kendoGridDetailTemplate let-dataItem>
   <section>
-  {{ dataItem.ticker | getDividendTable}}
+    <table>
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Dividend</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of (dataItem.ticker | getDividendTable) | async">
+        <td>{{item.Date}}</td>
+        <td>{{item.Dividends}}</td>
+      </tr>
+      </tbody>
+    </table>
   </section>
 </ng-template>
 </kendo-grid>

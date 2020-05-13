@@ -39,6 +39,6 @@ class DividendScraper(APIView):
             f'https://query1.finance.yahoo.com/v7/finance/download/{ticker}?period1=1557754812&period2=1589377212&interval=1d&events=div')
         with io.BytesIO(excel_data.content) as excel:
             df = pd.read_csv(excel)
-            response = df.T.to_dict()
-        print(response)
+            response = df.T.to_dict().values()
+            print(response)
         return Response(response)

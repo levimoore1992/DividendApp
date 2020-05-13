@@ -6,7 +6,7 @@ import {StockListService} from '../services/stock-list.service';
 })
 export class GetDividendTablePipe implements PipeTransform {
 constructor(private stockService: StockListService) {}
-  transform(value: unknown, ...args: unknown[]): unknown {
+ transform(value: unknown, ...args: unknown[]): any {
   return this.getDividendTable(value);
   }
 
@@ -14,10 +14,7 @@ constructor(private stockService: StockListService) {}
     const payload = {
       ticker
     };
-    this.stockService.getChart(payload).subscribe(res => {
-      console.log(res);
-      return res;
-    });
+    return this.stockService.getChart(payload);
   }
 
 }
