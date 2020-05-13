@@ -1,3 +1,18 @@
+<mat-card>
+  <form [formGroup]="stockSaveForm" class="stock-save-form">
+    <mat-form-field>
+    <input matInput placeholder="Expected Dividends" [(ngModel)]="profitWanted" formControlName="profitWanted">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter Stock Ticker</mat-label>
+    <input type="text" matInput formControlName="ticker">
+  </mat-form-field>
+  <mat-error *ngIf="error">{{error}}</mat-error>
+  <button mat-raised-button (click)="saveStock()">Save Stock</button>
+</form>
+</mat-card>
+
+
 <kendo-grid
   [data]="gridView"
   [sort]="sort"
@@ -32,16 +47,6 @@
 
 
 
-<form [formGroup]="stockSaveForm" class="stock-save-form">
-    <mat-form-field>
-    <input matInput placeholder="Expected Dividends" [(ngModel)]="profitWanted" formControlName="profitWanted">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Enter Stock Ticker</mat-label>
-    <input type="text" matInput formControlName="ticker">
-  </mat-form-field>
-  <mat-error *ngIf="error">{{error}}</mat-error>
-  <button mat-raised-button (click)="saveStock()">Save Stock</button>
-</form>
+
 
 
