@@ -19,6 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
 import { SaveListComponent } from './views/save-list/save-list.component';
 import {MatListModule} from "@angular/material/list";
 import {BodyModule, ExcelModule, GridModule, SharedModule} from '@progress/kendo-angular-grid';
+import { GetDividendTablePipe } from './pipes/get-dividend-table.pipe';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {BodyModule, ExcelModule, GridModule, SharedModule} from '@progress/kendo
     NavbarComponent,
     HomeComponent,
     ResultsComponent,
-    SaveListComponent
+    SaveListComponent,
+    GetDividendTablePipe
   ],
   imports: [
     BrowserModule,
