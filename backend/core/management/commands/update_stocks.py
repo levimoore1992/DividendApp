@@ -13,3 +13,4 @@ class Command(BaseCommand):
                 self.stdout.write(f"Data written for {stock} ")
             except:
                 continue
+        exit()

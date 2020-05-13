@@ -40,6 +40,11 @@
   </kendo-grid-column>
 
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
+  <kendo-grid-column field="last_updated" title="Last Updated">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+      {{dataItem.last_updated | date : 'short'}}
+    </ng-template>
+  </kendo-grid-column>
   <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
 
 </kendo-grid>

@@ -1,15 +1,8 @@
-from .utils import get_stock_data
-
-from .models import Stock
 from background_task import background
+
+from django.core.management import call_command
 
 
 @background(schedule=60)
 def get_stock():
-    for stock in Stock.objects.all().values_list('ticker'):
-        try:
-            get_stock_data(stock[0])
-            self.stdout.write(f"Data written for stock ")
-
-        except:
-            continue
+    call_command('update_stocks')

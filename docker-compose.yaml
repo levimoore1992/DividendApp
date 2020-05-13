@@ -24,7 +24,7 @@ services:
   dj-dividend:
     container_name: dividend
     build: backend
-    command: sh -c "python manage.py makemigrations && python manage.py migrate &&  python manage.py crontab add && python manage.py runserver 0.0.0.0:80 && python manage.py update_stocks && python manage.py wait_for_db"
+    command: bash -c " python manage.py wait_for_db && python manage.py makemigrations && python manage.py migrate && python manage.py crontab add && python manage.py update_stocks && python manage.py runserver 0.0.0.0:80 &&   python manage.py process_tasks"
     environment:
       - DB_HOST=db
       - DB_NAME=app
