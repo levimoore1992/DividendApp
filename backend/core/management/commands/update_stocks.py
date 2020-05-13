@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 
-from backend.dividends.models import Stock
-from backend.dividends.utils import get_stock_data
+from dividends.models import Stock
+from dividends.utils import get_stock_data
 
 
 class Command(BaseCommand):
@@ -11,6 +11,5 @@ class Command(BaseCommand):
             try:
                 get_stock_data(stock[0])
                 self.stdout.write(f"Data written for {stock} ")
-
             except:
                 continue

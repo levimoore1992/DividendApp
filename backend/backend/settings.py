@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'dividends',
     'rest_framework',
     'django_crontab',
-    'background_task'
+    'background_task',
+    'core'
 
 ]
 CORS_ORIGIN_ALLOW_ALL = True
