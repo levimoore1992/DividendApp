@@ -46,7 +46,11 @@
     </ng-template>
   </kendo-grid-column>
   <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
-
+<ng-template kendoGridDetailTemplate let-dataItem>
+  <section>
+    {{getDividendTable(dataItem.ticker)}}
+  </section>
+</ng-template>
 </kendo-grid>
 <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 

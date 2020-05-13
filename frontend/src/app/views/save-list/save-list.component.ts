@@ -76,4 +76,10 @@ export class SaveListComponent implements OnInit {
         };
     }
 
+  getDividendTable(ticker) {
+    const payload = {
+      ticker
+    }
+    return this.stockService.getChart(payload);
+  }
 }

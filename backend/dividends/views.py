@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from .serializers import TickerSerializer
 from .models import Stock
 from .utils import get_stock_data
-
+import requests
+import pandas as pd
 
 class DividendViewSet(APIView):
 
@@ -27,3 +28,11 @@ class DividendListViewSet(APIView):
         return Response(stocks)
 
 
+class DividendScraper(APIView):
+
+    def post(self, request, *args, **kwargs):
+        ticker = request.data['ticker']
+        excel_data = requests.get(f'https://query1.finance.yahoo.com/v7/finance/download/{ticker}?period1=1557754812&period2=1589377212&interval=1d&events=div')
+        df = pandas.read_excel(excel_data)
+        response = dict(zip(df['Date'], df['Dividends']))
+        return Response(response)

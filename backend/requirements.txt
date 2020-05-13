@@ -6,3 +6,5 @@ yfinance
 lxml
 django-crontab
 django-background-tasks
+pandas
+xlrd
