@@ -30,16 +30,21 @@
   <kendo-grid-column field="price" title="Price"></kendo-grid-column>
   <kendo-grid-column field="investment_needed" title="Investment Needed">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-      {{ dataItem.price * (profitWanted / dataItem.dividend) | number}}
+      ${{ dataItem.price * (profitWanted / dataItem.dividend) | number}}
     </ng-template>
   </kendo-grid-column>
   <kendo-grid-column field="shares_needed" title="Shares Needed">
       <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-    {{profitWanted / dataItem.dividend | number}}
+    {{(profitWanted / dataItem.dividend).toFixed(0) | number}}
   </ng-template>
   </kendo-grid-column>
 
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
+  <kendo-grid-column  title="Return %">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+      {{((dataItem.dividend / dataItem.price) * 100).toFixed(2) }}%
+    </ng-template>
+  </kendo-grid-column>
   <kendo-grid-column field="last_updated" title="Last Updated">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
       {{dataItem.last_updated | date : 'short'}}
@@ -57,7 +62,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let item of (dataItem.ticker | getDividendTable) | async">
-        <td>{{item.Date}}</td>
+        <td>{{item.Date | date}}</td>
         <td>{{item.Dividends}}</td>
       </tr>
       </tbody>

@@ -40,5 +40,5 @@ class DividendScraper(APIView):
         with io.BytesIO(excel_data.content) as excel:
             df = pd.read_csv(excel)
             response = df.T.to_dict().values()
-            print(response)
+
         return Response(response)
