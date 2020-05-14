@@ -16,3 +16,9 @@ class Stock(models.Model):
         if float(self.dividend) / float(self.price) > .05:
             self.is_investable = True
         super(Stock, self).save(*args, **kwargs)
+
+
+class UnsupportedStocks(models.Model):
+    """Stock that arent supported by the yahoo finance API"""
+
+    ticker = models.CharField(max_length=4)

@@ -1,6 +1,6 @@
 import yfinance as yf
 
-from .models import Stock
+from .models import Stock, UnsupportedStocks
 
 
 def get_stock_data(ticker):
@@ -11,6 +11,8 @@ def get_stock_data(ticker):
         price = float(stock.info['ask'])
         name = stock.info['shortName']
     except Exception as e:
+        unsupported = UnsupportedStocks(ticker=ticker)
+        unsupported.save()
         return {'error': f"This stock does not have all the info"}
 
     stock_model, created = Stock.objects.update_or_create(stock_name=name,
