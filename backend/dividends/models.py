@@ -8,6 +8,7 @@ class Stock(models.Model):
     price = models.FloatField(round(2))
     ticker = models.CharField(max_length=4)
     is_investable = models.BooleanField(default=False)
+    is_owned = models.BooleanField(default=False)
 
     def __str__(self):
         return self.stock_name
