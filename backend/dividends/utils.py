@@ -1,5 +1,3 @@
-from sys import stdout
-
 import yfinance as yf
 import requests
 from bs4 import BeautifulSoup
@@ -63,9 +61,9 @@ def get_unsupported_stock_data(ticker):
     try:
 
         stock_model, created = Stock.objects.update_or_create(ticker=ticker,
-                                                          defaults={'dividend': dividend_rate,
-                                                                    'price': price,
-                                                                    'stock_name': name})
+                                                              defaults={'dividend': dividend_rate,
+                                                                        'price': price,
+                                                                        'stock_name': name})
     except Exception as e:
         print(e)
     if stock_model:
@@ -74,3 +72,6 @@ def get_unsupported_stock_data(ticker):
     else:
         print(f'New: {created}')
         created.save()
+
+
+
