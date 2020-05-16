@@ -22,12 +22,14 @@
   }"
   (sortChange)="sortChange($event)"
   *ngIf="!loading"
+  [rowClass]="isInvestable"
 >
 <ng-template kendoGridToolbarTemplate>
 <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
 </ng-template>
   <kendo-grid-column field="stock_name" title="Name"></kendo-grid-column>
   <kendo-grid-column field="price" title="Price"></kendo-grid-column>
+  <kendo-grid-column field="ex_div_date" title="Last or Next Ex Div"></kendo-grid-column>
   <kendo-grid-column field="investment_needed" title="Investment Needed">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
       ${{ dataItem.price * (profitWanted / dataItem.dividend) | number}}
@@ -35,7 +37,7 @@
   </kendo-grid-column>
   <kendo-grid-column field="shares_needed" title="Shares Needed">
       <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-    {{(profitWanted / dataItem.dividend).toFixed(0) | number}}
+    {{(profitWanted / dataItem.dividend).toFixed(0)}}
   </ng-template>
   </kendo-grid-column>
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
