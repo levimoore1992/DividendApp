@@ -38,9 +38,8 @@
     {{(profitWanted / dataItem.dividend).toFixed(0) | number}}
   </ng-template>
   </kendo-grid-column>
-
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
-  <kendo-grid-column  title="Return %">
+  <kendo-grid-column  title="Return %" field="return">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
       {{((dataItem.dividend / dataItem.price) * 100).toFixed(2) }}%
     </ng-template>

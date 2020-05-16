@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 export class SaveListComponent implements OnInit {
   multiple = true;
   sort: SortDescriptor[] = [{
-    field: 'ticker',
+    field: 'return',
     dir: 'asc'
   }]
   stocks: [{stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number}];
