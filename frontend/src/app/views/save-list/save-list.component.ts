@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {StockListService} from '../../services/stock-list.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {SortDescriptor, orderBy} from '@progress/kendo-data-query';
-import {GridDataResult} from '@progress/kendo-angular-grid';
-import {Observable} from 'rxjs';
+import {orderBy, SortDescriptor} from '@progress/kendo-data-query';
+import {GridDataResult, RowClassArgs} from '@progress/kendo-angular-grid';
+
 @Component({
   selector: 'app-save-list',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './save-list.component.html',
   styleUrls: ['./save-list.component.css']
 })
@@ -14,7 +15,7 @@ export class SaveListComponent implements OnInit {
   sort: SortDescriptor[] = [{
     field: 'ticker',
     dir: 'asc'
-  }]
+  }];
   stocks: [{stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number}];
   stockSaveForm: FormGroup;
   error: string;
@@ -74,6 +75,15 @@ export class SaveListComponent implements OnInit {
             data: orderBy(this.stocks, this.sort),
             total: this.stocks.length
         };
+    }
+
+    isInvestable(context: RowClassArgs) {
+    const row = context.dataItem.is_investable;
+    return {
+      green: row,
+      red: !row
+    };
+
     }
 
 
