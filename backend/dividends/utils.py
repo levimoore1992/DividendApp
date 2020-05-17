@@ -12,8 +12,9 @@ def get_stock_data(ticker):
         price = float(stock.info['ask'])
         name = stock.info['shortName']
     except Exception as e:
-        unsupported = UnsupportedStocks(ticker=ticker)
-        unsupported.save()
+        unsupported, created = UnsupportedStocks.objects.get_or_create(ticker=ticker)
+        if created:
+            created.save()
 
     stock_model, created = Stock.objects.update_or_create(stock_name=name,
                                                           defaults={'dividend': dividend_rate,
