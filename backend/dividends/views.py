@@ -42,3 +42,9 @@ class DividendScraper(APIView):
             response = df.T.to_dict().values()
 
         return Response(response)
+
+class NextDividend(APIView):
+
+    def get(self, request, *args, **kwargs):
+            stocks = Stock.objects.all()
+

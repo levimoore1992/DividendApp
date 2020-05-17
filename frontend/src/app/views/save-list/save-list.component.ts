@@ -35,34 +35,6 @@ export class SaveListComponent implements OnInit {
     });
 
 
-    this.stockSaveForm = this.fb.group({
-      profitWanted: ['', Validators.required],
-      ticker: ['', Validators.required]
-    });
-
-  }
-  get ticker() {
-    return this.stockSaveForm.get('ticker').value;
-  }
-
-  saveStock() {
-    this.error = null;
-
-    const payload = {
-      ticker: this.ticker
-    };
-
-    this.stockService.saveStock(payload).subscribe(res => {
-
-      // @ts-ignore
-      if (res.error) {
-        this.error = 'We werent able to get or update that stock';
-      } else {
-              // @ts-ignore
-      this.stocks.push(res);
-      }
-
-    });
   }
 
       sortChange(sort: SortDescriptor[]): void {
