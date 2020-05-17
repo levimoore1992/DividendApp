@@ -17,6 +17,7 @@
   (sortChange)="sortChange($event)"
   *ngIf="!loading"
   [rowClass]="isInvestable"
+  filterable="menu"
 >
 <ng-template kendoGridToolbarTemplate>
 <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
@@ -45,6 +46,7 @@
       {{dataItem.last_updated | date : 'short'}}
     </ng-template>
   </kendo-grid-column>
+  <kendo-grid-column filterable="true" field="is_investable" title="Is over 5%"></kendo-grid-column>
   <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
 <ng-template kendoGridDetailTemplate let-dataItem>
   <section>

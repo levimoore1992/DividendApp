@@ -17,8 +17,7 @@ export class SaveListComponent implements OnInit {
     dir: 'asc'
   }];
   stocks: [{stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number}];
-  stockSaveForm: FormGroup;
-  error: string;
+
   gridView: GridDataResult;
   loading;
   profitWanted: number;

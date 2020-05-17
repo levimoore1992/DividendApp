@@ -29,6 +29,9 @@ class Stock(models.Model):
             return None
         else:
             date = datetime.strptime(data['data']['exDividendDate'], '%m/%d/%Y')
+            if date < datetime.now():
+                return None
+
             correct_date = date.strftime('%Y-%m-%d')
             return correct_date
 
