@@ -13,7 +13,6 @@ import pandas as pd
 class DividendViewSet(APIView):
 
     def post(self, request, *args, **kwargs):
-
         serializer = TickerSerializer(data=request.data)
         if serializer.is_valid():
             ticker = serializer.validated_data
@@ -43,8 +42,8 @@ class DividendScraper(APIView):
 
         return Response(response)
 
+
 class NextDividend(APIView):
 
     def get(self, request, *args, **kwargs):
-            stocks = Stock.objects.all()
-
+        stocks = Stock.objects.all()
