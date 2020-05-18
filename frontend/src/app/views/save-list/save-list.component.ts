@@ -13,8 +13,8 @@ import {GridDataResult, RowClassArgs} from '@progress/kendo-angular-grid';
 export class SaveListComponent implements OnInit {
   multiple = true;
   sort: SortDescriptor[] = [{
-    field: 'return',
-    dir: 'asc'
+    field: 'ex_div_date',
+    dir: 'desc'
   }];
   stocks: [{stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number}];
 

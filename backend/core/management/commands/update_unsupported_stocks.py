@@ -10,7 +10,6 @@ class Command(BaseCommand):
         for u_stock in UnsupportedStocks.objects.all().values_list('ticker'):
             try:
                 get_unsupported_stock_data(u_stock[0])
-                self.stdout.write(f"Data written for {u_stock} ")
             except:
                 continue
         exit()
