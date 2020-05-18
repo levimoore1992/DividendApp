@@ -13,9 +13,6 @@ export class StockListService {
     return this.http.get('http://localhost:80/api/save-list');
   }
 
-  saveStock(payload) {
-    return this.http.post('http://127.0.0.1:80/api/dividends', payload);
-  }
 
   getChart(ticker){
     return this.http.post('http://127.0.0.1:80/api/scraper', ticker);

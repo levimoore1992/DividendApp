@@ -10,7 +10,7 @@ class Stock(models.Model):
     price = models.FloatField(round(2))
     ticker = models.CharField(max_length=4)
     is_investable = models.BooleanField(default=False)
-    is_owned = models.BooleanField(default=False)
+    is_owned = models.BooleanField(null=True, blank=True, default=False)
     ex_div_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
@@ -19,21 +19,23 @@ class Stock(models.Model):
     def save(self, *args, **kwargs):
         self.ex_div_date = self.get_ex_div_date(self.ticker)
         self.is_investable = .05 < float(self.dividend) / float(self.price) < .13
+
         super(Stock, self).save(*args, **kwargs)
 
     def get_ex_div_date(self, ticker):
         r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks')
         data = r.json()
-        if data['data']['exDividendDate'] == 'N/A' or data['data'] == 'null':
+        if data['data'] is None:
             return None
-        else:
+        elif data['data']['exDividendDate'] != 'N/A':
             date = datetime.strptime(data['data']['exDividendDate'], '%m/%d/%Y')
             if date < datetime.now():
                 return None
 
             correct_date = date.strftime('%Y-%m-%d')
             return correct_date
-
+        else:
+            return None
 
 class UnsupportedStocks(models.Model):
     """Stock that arent supported by the yahoo finance API"""

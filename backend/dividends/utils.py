@@ -18,8 +18,8 @@ def get_stock_data(ticker):
 
     stock_model, created = Stock.objects.update_or_create(stock_name=name,
                                                           defaults={'dividend': dividend_rate,
-                                                                    'price': price,
-                                                                    'ticker': ticker})
+                                                                    'price': price
+                                                                    })
     if stock_model:
         stock_model.save()
     else:
@@ -60,19 +60,19 @@ def get_unsupported_stock_data(ticker):
     price = get_price(content)
     name = get_name(content)
     try:
-
-        stock_model, created = Stock.objects.update_or_create(ticker=ticker,
+        stock_model, created = Stock.objects.update_or_create(stock_name=name,
                                                               defaults={'dividend': dividend_rate,
                                                                         'price': price,
-                                                                        'stock_name': name})
+                                                                        ticker: ticker
+                                                                        })
+
+        if stock_model:
+            stock_model.save()
+        else:
+            created.save()
     except Exception as e:
-        print(e)
-    if stock_model:
-        print(f'Stock Model {stock_model}')
-        stock_model.save()
-    else:
-        print(f'New: {created}')
-        created.save()
+        print(f'{ticker}: {e}')
+
 
 
 
