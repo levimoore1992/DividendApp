@@ -15,8 +15,9 @@ def get_stock_data(ticker):
         unsupported, created = UnsupportedStocks.objects.get_or_create(ticker=ticker)
         if created:
             created.save()
+        return {'error':"Couldnt get this stock"}
 
-    stock_model, created = Stock.objects.update_or_create(stock_name=name,
+    stock_model, created = Stock.objects.update_or_create(ticker=ticker,
                                                           defaults={'dividend': dividend_rate,
                                                                     'price': price
                                                                     })
