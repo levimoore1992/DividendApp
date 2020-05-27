@@ -20,6 +20,7 @@ class Stock(models.Model):
 
     def save(self, *args, **kwargs):
         self.ex_div_date, self.next_div_amount = self.get_ex_div_date(self.ticker)
+
         self.is_investable = .07 < float(self.dividend) / float(self.price) < .13
 
         super(Stock, self).save(*args, **kwargs)

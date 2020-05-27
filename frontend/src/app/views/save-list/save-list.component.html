@@ -32,13 +32,17 @@
 
   <kendo-grid-column field="investment_needed" title="Investment Needed">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-      ${{ dataItem.price * (profitWanted / dataItem.dividend) | number}}
+      Total :${{ (dataItem.price * (profitWanted / dataItem.dividend)).toFixed(2)}}
+      <br> Invested : {{dataItem.price * dataItem.shares_owned}}
+      <br> Needed: {{(dataItem.price * (profitWanted / dataItem.dividend) - (dataItem.price * dataItem.shares_owned)).toFixed(2)}}
     </ng-template>
   </kendo-grid-column>
 
   <kendo-grid-column field="shares_needed" title="Shares Needed">
       <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-    {{(profitWanted / dataItem.dividend).toFixed(0) }} Owned: {{dataItem.shares_owned}}
+    Total:{{(profitWanted / dataItem.dividend).toFixed(0) }}
+        <br> Owned: {{dataItem.shares_owned}}
+        <br> Needed: {{((profitWanted / dataItem.dividend) - dataItem.shares_owned).toFixed(0)}}
   </ng-template>
   </kendo-grid-column>
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>

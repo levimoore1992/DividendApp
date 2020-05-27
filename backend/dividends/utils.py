@@ -9,7 +9,7 @@ def get_stock_data(ticker):
 
     try:
         dividend_rate = float(stock.info['dividendRate'])
-        price = float(stock.info['ask'])
+        price = float(stock.info['regularMarketPrice'])
         name = stock.info['shortName']
     except Exception as e:
         unsupported, created = UnsupportedStocks.objects.get_or_create(ticker=ticker)
@@ -19,7 +19,8 @@ def get_stock_data(ticker):
 
     stock_model, created = Stock.objects.update_or_create(ticker=ticker,
                                                           defaults={'dividend': dividend_rate,
-                                                                    'price': price
+                                                                    'price': price,
+                                                                    'stock_name': name
                                                                     })
     if stock_model:
         stock_model.save()
@@ -61,10 +62,9 @@ def get_unsupported_stock_data(ticker):
     price = get_price(content)
     name = get_name(content)
     try:
-        stock_model, created = Stock.objects.update_or_create(stock_name=name,
+        stock_model, created = Stock.objects.update_or_create(ticker=ticker,
                                                               defaults={'dividend': dividend_rate,
                                                                         'price': price,
-                                                                        ticker: ticker
                                                                         })
 
         if stock_model:
