@@ -41,7 +41,8 @@ class DividendScraper(APIView):
         return Response(response)
 
 
-class NextDividend(APIView):
+class Portfolio(APIView):
 
     def get(self, request, *args, **kwargs):
-        stocks = Stock.objects.all()
+        stocks = Stock.objects.filter(is_owned=True).values()
+        return Response(stocks)

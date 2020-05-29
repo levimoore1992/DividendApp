@@ -20,6 +20,7 @@ import { SaveListComponent } from './views/save-list/save-list.component';
 import {MatListModule} from "@angular/material/list";
 import {BodyModule, ExcelModule, GridModule, SharedModule} from '@progress/kendo-angular-grid';
 import { GetDividendTablePipe } from './pipes/get-dividend-table.pipe';
+import { PortfolioComponent } from './views/portfolio/portfolio.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { GetDividendTablePipe } from './pipes/get-dividend-table.pipe';
     HomeComponent,
     ResultsComponent,
     SaveListComponent,
-    GetDividendTablePipe
+    GetDividendTablePipe,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,
