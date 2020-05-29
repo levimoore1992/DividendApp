@@ -66,6 +66,7 @@ def get_unsupported_stock_data(ticker):
         stock_model, created = Stock.objects.update_or_create(ticker=ticker,
                                                               defaults={'dividend': dividend_rate,
                                                                         'price': price,
+                                                                        'name': name
                                                                         })
 
         if stock_model:
