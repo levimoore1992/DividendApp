@@ -8,7 +8,7 @@ class Stock(models.Model):
     dividend = models.FloatField(round(2))
     last_updated = models.DateTimeField(auto_now=True)
     price = models.FloatField(round(2))
-    ticker = models.CharField(max_length=4)
+    ticker = models.CharField(max_length=5)
     is_investable = models.BooleanField(default=False)
     is_owned = models.BooleanField(null=True, blank=True, default=False)
     shares_owned = models.IntegerField(default=0)
@@ -44,4 +44,4 @@ class Stock(models.Model):
 class UnsupportedStocks(models.Model):
     """Stock that arent supported by the yahoo finance API"""
 
-    ticker = models.CharField(max_length=4)
+    ticker = models.CharField(max_length=5)

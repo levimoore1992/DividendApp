@@ -9,7 +9,8 @@ def get_stock_data(ticker):
 
     try:
         dividend_rate = float(stock.info['dividendRate'])
-        price = float(stock.info['regularMarketPrice'])
+        # price = float(stock.info['regularMarketPrice'])
+        price = float(stock.info['ask'])
         name = stock.info['shortName']
     except Exception as e:
         unsupported, created = UnsupportedStocks.objects.get_or_create(ticker=ticker)
