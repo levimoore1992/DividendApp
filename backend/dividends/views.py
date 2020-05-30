@@ -1,4 +1,6 @@
 import io
+from datetime import datetime
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import TickerSerializer
@@ -6,6 +8,7 @@ from .models import Stock
 from .utils import get_stock_data
 import requests
 import pandas as pd
+import calendar
 
 
 class DividendViewSet(APIView):
@@ -46,3 +49,21 @@ class Portfolio(APIView):
     def get(self, request, *args, **kwargs):
         stocks = Stock.objects.filter(is_owned=True).values()
         return Response(stocks)
+
+
+class ChartData(APIView):
+
+    def post(self, request, *args, **kwargs):
+        ticker = request.data['ticker']
+
+        r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks').json()
+        shares_owned = Stock.objects.get(ticker=ticker).shares_owned
+
+        row = r['data']['dividends']['rows'][0]
+        date = datetime.strptime(row['paymentDate'], '%m/%d/%Y')
+        month_number = date.month
+        month = calendar.month_name[month_number]
+        amount = row['amount'].strip('$')
+
+        response = {'payment_month': month, 'amount': float(amount) * shares_owned}
+        return Response(response)

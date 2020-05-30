@@ -21,6 +21,11 @@ import {MatListModule} from "@angular/material/list";
 import {BodyModule, ExcelModule, GridModule, SharedModule} from '@progress/kendo-angular-grid';
 import { GetDividendTablePipe } from './pipes/get-dividend-table.pipe';
 import { PortfolioComponent } from './views/portfolio/portfolio.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import 'hammerjs';
+
+
 
 
 @NgModule({
@@ -31,7 +36,8 @@ import { PortfolioComponent } from './views/portfolio/portfolio.component';
     ResultsComponent,
     SaveListComponent,
     GetDividendTablePipe,
-    PortfolioComponent
+    PortfolioComponent,
+    LineChartComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,8 @@ import { PortfolioComponent } from './views/portfolio/portfolio.component';
     SharedModule,
     BodyModule,
     FormsModule,
-    ExcelModule
+    ExcelModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

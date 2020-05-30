@@ -3,3 +3,9 @@
   width: 25%;
   border: double black;
 }
+
+.main{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

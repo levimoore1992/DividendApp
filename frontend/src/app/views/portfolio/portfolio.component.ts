@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {StockService} from "../../services/stock.service";
+import {StockService} from '../../services/stock.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -8,13 +8,14 @@ import {StockService} from "../../services/stock.service";
 })
 export class PortfolioComponent implements OnInit {
   stocks;
+  selectedStocks: any;
   constructor(private stockService: StockService) { }
 
   ngOnInit(): void {
     this.stockService.getPortfolio().subscribe(res => {
-      console.log(res)
       this.stocks = res;
     });
   }
+
 
 }

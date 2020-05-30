@@ -1,11 +1,11 @@
 <div class="main">
-  <div class="list-container">
-    <mat-selection-list>
-          <mat-list-option *ngFor="let stock of stocks">
+  <div class="list-container" >
+    <mat-selection-list #stockList [(ngModel)]="selectedStocks">
+          <mat-list-option *ngFor="let stock of stocks" [value]="stock">
             {{stock.ticker}}
           </mat-list-option>
     </mat-selection-list>
   </div>
-
+      <app-line-chart [tickers]="selectedStocks"></app-line-chart>
 </div>
 
