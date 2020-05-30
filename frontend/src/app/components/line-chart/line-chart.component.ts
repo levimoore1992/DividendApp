@@ -6,25 +6,15 @@ import {StockService} from '../../services/stock.service';
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.css']
 })
-export class LineChartComponent implements OnInit, OnChanges {
+export class LineChartComponent implements OnInit {
 
-  @Input() tickers: [string];
-  months: [any];
-  chartData: any;
 
   constructor(private stockService: StockService) { }
 
   ngOnInit(): void {
+    this.stockService.getChartData();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes.tickers.currentValue.ticker)
-    changes.tickers.currentValue.map(item => {
-      this.stockService.getChartData(item.ticker).subscribe(res => {
-        let  x = 1
-      })
-    });
 
-  }
 
 }

@@ -16,11 +16,8 @@ export class StockService {
     return this.http.get('http://127.0.0.1:80/api/portfolio');
   }
 
-  getChartData(ticker) {
-  const payload = {
-    ticker
-  };
+  getChartData() {
 
-  return this.http.post('http://127.0.0.1:80/api/chart-data', payload);
+  return this.http.get('http://127.0.0.1:80/api/chart-data');
   }
 }

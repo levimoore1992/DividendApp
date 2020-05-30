@@ -53,17 +53,20 @@ class Portfolio(APIView):
 
 class ChartData(APIView):
 
-    def post(self, request, *args, **kwargs):
-        ticker = request.data['ticker']
+    def get(self, request, *args, **kwargs):
+        response = {}
 
-        r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks').json()
-        shares_owned = Stock.objects.get(ticker=ticker).shares_owned
+        for stock in Stock.objects.filter(is_owned=True):
+            if stock.payment_date:
+                model_payment_date = stock.payment_date
+                formatted_date = datetime.strptime(model_payment_date, '%Y-%m-%d')
+                month_index = formatted_date.month
+                month_name = calendar.month_name[month_index]
+                amount_from_stock = stock.next_div_amount * stock.shares_owned
 
-        row = r['data']['dividends']['rows'][0]
-        date = datetime.strptime(row['paymentDate'], '%m/%d/%Y')
-        month_number = date.month
-        month = calendar.month_name[month_number]
-        amount = row['amount'].strip('$')
-
-        response = {'payment_month': month, 'amount': float(amount) * shares_owned}
+                if month_name not in response:
+                    response[month_name] = amount_from_stock
+                else:
+                    response[month_name] += amount_from_stock
+                    
         return Response(response)
