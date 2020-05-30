@@ -59,14 +59,14 @@ class ChartData(APIView):
         for stock in Stock.objects.filter(is_owned=True):
             if stock.payment_date:
                 model_payment_date = stock.payment_date
-                formatted_date = datetime.strptime(model_payment_date, '%Y-%m-%d')
+                formatted_date = datetime.strptime(str(model_payment_date), '%Y-%m-%d')
                 month_index = formatted_date.month
                 month_name = calendar.month_name[month_index]
                 amount_from_stock = stock.next_div_amount * stock.shares_owned
 
                 if month_name not in response:
-                    response[month_name] = amount_from_stock
+                    response[month_name] = round(amount_from_stock)
                 else:
-                    response[month_name] += amount_from_stock
-                    
+                    response[month_name] += round(amount_from_stock)
+
         return Response(response)
