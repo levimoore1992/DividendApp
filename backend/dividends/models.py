@@ -34,9 +34,9 @@ class Stock(models.Model):
         elif data['data']['exDividendDate'] != 'N/A':
             date = datetime.strptime(data['data']['exDividendDate'], '%m/%d/%Y')
             payment_date = datetime.strptime(data['data']['dividendPaymentDate'], '%m/%d/%Y')
-            if payment_date < datetime.now():
-                return None, None, None
             next_div_amount = data['data']['dividends']['rows'][0]['amount'].strip('$')
+            if date < datetime.now():
+                return None, next_div_amount, payment_date
             correct_date = date.strftime('%Y-%m-%d')
             return correct_date, next_div_amount, payment_date
         else:
