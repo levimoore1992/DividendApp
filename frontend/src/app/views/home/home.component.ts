@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   stockForm: FormGroup;
   isSubmitted = false;
 
-  constructor(private fb: FormBuilder, private stockService: StockService) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.stockForm = this.fb.group({

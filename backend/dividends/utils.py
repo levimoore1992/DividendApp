@@ -1,10 +1,8 @@
-import yfinance as yf
 import requests
 from .models import Stock
 
 
 def get_stock_data(ticker):
-    stock = yf.Ticker(ticker)
     try:
         r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/info?assetclass=stocks').json()
     except:

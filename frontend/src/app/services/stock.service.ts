@@ -9,6 +9,7 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   postStock(payload) {
+
     return this.http.post('http://127.0.0.1:80/api/dividends', payload);
   }
 

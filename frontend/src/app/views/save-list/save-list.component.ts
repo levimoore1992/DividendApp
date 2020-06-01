@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {StockListService} from '../../services/stock-list.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {orderBy, SortDescriptor} from '@progress/kendo-data-query';
 import {GridDataResult, RowClassArgs} from '@progress/kendo-angular-grid';
+import {StockService} from "../../services/stock.service";
 
 @Component({
   selector: 'app-save-list',
@@ -21,7 +21,7 @@ export class SaveListComponent implements OnInit {
   gridView: GridDataResult;
   loading;
   profitWanted: number;
-  constructor(private stockService: StockListService, private fb: FormBuilder) {}
+  constructor(private stockService: StockListService, private service: StockService) {}
 
   ngOnInit(): void {
     this.loading = true;
@@ -58,4 +58,10 @@ export class SaveListComponent implements OnInit {
     }
 
 
+  updateStock(ticker: string) {
+    const payload = {
+      ticker
+    };
+    this.service.postStock(payload).subscribe();
+  }
 }

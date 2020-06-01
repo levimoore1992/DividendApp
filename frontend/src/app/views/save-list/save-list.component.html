@@ -59,6 +59,11 @@
       {{dataItem.last_updated | date : 'short'}}
     </ng-template>
   </kendo-grid-column>
+  <kendo-grid-column title="Update">
+    <ng-template kendoGridCellTemplate let-dataItem="dataItem">
+      <button mat-raised-button (click)="updateStock(dataItem.ticker)">Update</button>
+    </ng-template>
+  </kendo-grid-column>
 
   <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
 

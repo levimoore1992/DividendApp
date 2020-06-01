@@ -9,7 +9,7 @@ export class StockListService {
   constructor(private http: HttpClient) { }
 
 
-  getList() {
+  getList(){
     return this.http.get('http://localhost:80/api/save-list');
   }
 
