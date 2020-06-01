@@ -5,9 +5,9 @@ from datetime import datetime
 
 class Stock(models.Model):
     stock_name = models.CharField(max_length=100)
-    dividend = models.FloatField(round(2))
+    dividend = models.FloatField()
     last_updated = models.DateTimeField(auto_now=True)
-    price = models.FloatField(round(2))
+    price = models.FloatField()
     ticker = models.CharField(max_length=5)
     is_investable = models.BooleanField(default=False)
     is_owned = models.BooleanField(null=True, blank=True, default=False)
@@ -27,7 +27,11 @@ class Stock(models.Model):
         super(Stock, self).save(*args, **kwargs)
 
     def get_div_dates(self, ticker):
-        r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks')
+        try:
+            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks')
+        except:
+            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/info?assetclass=etf')
+
         data = r.json()
         if data['data'] is None:
             return None, None, None
@@ -43,7 +47,4 @@ class Stock(models.Model):
             return None, None, None
 
 
-class UnsupportedStocks(models.Model):
-    """Stock that arent supported by the yahoo finance API"""
 
-    ticker = models.CharField(max_length=5)

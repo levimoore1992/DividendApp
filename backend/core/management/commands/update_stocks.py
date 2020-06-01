@@ -10,6 +10,7 @@ class Command(BaseCommand):
         for stock in Stock.objects.all().values_list('ticker'):
             try:
                 get_stock_data(stock[0])
-            except:
+            except Exception as e:
+                print(e)
                 continue
         exit()
