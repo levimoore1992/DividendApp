@@ -6,7 +6,7 @@ from .models import Stock
 
 
 class DividendAdmin(admin.ModelAdmin):
-    list_display = ('ticker', 'stock_name', 'shares_owned', 'shares_owned', 'price')
+    list_display = ('ticker', 'stock_name', 'shares_owned', 'price')
     list_filter = ('is_investable', 'is_owned')
 
 
