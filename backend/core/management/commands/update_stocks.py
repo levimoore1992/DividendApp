@@ -12,6 +12,6 @@ class Command(BaseCommand):
                 get_stock_data(stock[0])
                 print(f'Got stock data for {stock}')
             except Exception as e:
-                print(e)
+                print(f'Error on {stock[0]} {e}')
                 continue
         exit()

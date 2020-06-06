@@ -27,14 +27,12 @@ class Stock(models.Model):
         super(Stock, self).save(*args, **kwargs)
 
     def get_div_dates(self, ticker):
-        try:
-            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks')
-        except:
-            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/info?assetclass=etf')
-
+        r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks')
         data = r.json()
-        if data['data'] is None:
-            return None, None, None
+
+        if not data['data']:
+            return self.get_etf_data(ticker)
+
         elif data['data']['exDividendDate'] != 'N/A':
             date = datetime.strptime(data['data']['exDividendDate'], '%m/%d/%Y')
             payment_date = datetime.strptime(data['data']['dividendPaymentDate'], '%m/%d/%Y')
@@ -46,5 +44,14 @@ class Stock(models.Model):
         else:
             return None, None, None
 
-
-
+    def get_etf_data(self, ticker):
+        try:
+            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=etf')
+            response = r.json()
+            data = response['data']['dividends']['rows'][0]
+            next_div_amount = data['amount'].strip('$')
+            payment_date = datetime.strptime(data['paymentDate'], '%m/%d/%Y')
+            return None, next_div_amount, payment_date
+        except Exception as e:
+            print(f'Failed in get etf function {self.ticker} {e}')
+            return None, None, None
