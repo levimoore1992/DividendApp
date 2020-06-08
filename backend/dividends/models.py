@@ -50,7 +50,10 @@ class Stock(models.Model):
             response = r.json()
             data = response['data']['dividends']['rows'][0]
             next_div_amount = data['amount'].strip('$')
-            payment_date = datetime.strptime(data['paymentDate'], '%m/%d/%Y')
+            try:
+                payment_date = datetime.strptime(data['paymentDate'], '%m/%d/%Y')
+            except:
+                payment_date = datetime.strptime(data['exOrEffDate'], '%m/%d/%Y')
             return None, next_div_amount, payment_date
         except Exception as e:
             print(f'Failed in get etf function {self.ticker} {e}')
