@@ -13,9 +13,6 @@ export class StockService {
     return this.http.post('http://127.0.0.1:80/api/dividends', payload);
   }
 
-  getPortfolio() {
-    return this.http.get('http://127.0.0.1:80/api/portfolio');
-  }
 
   getChartData() {
 

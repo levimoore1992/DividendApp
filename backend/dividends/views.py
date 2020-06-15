@@ -56,7 +56,7 @@ class ChartData(APIView):
     def get(self, request, *args, **kwargs):
         response = {}
 
-        for stock in Stock.objects.filter(is_owned=True):
+        for stock in Stock.objects.filter(is_owned=True).order_by('payment_date'):
             if stock.payment_date:
                 model_payment_date = stock.payment_date
                 formatted_date = datetime.strptime(str(model_payment_date), '%Y-%m-%d')
