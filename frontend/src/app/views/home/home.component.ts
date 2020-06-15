@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {StockService} from '../../services/stock.service';
 import {MatStepper} from '@angular/material/stepper';
 
 @Component({

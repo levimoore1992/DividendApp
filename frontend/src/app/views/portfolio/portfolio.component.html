@@ -1,2 +1,21 @@
+<div class="main">
+  <mat-card class="card">
+  <form [formGroup]="simulationForm" (ngSubmit)="submitForm()" class="simulation-form">
+    <mat-card-title>Dividend Simulation</mat-card-title>
+
+    <mat-form-field>
+      <mat-label>Ticker</mat-label>
+      <input type="text" matInput formControlName="ticker">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Number of shares</mat-label>
+      <input type="number" matInput formControlName="shares">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</mat-card>
 <app-line-chart></app-line-chart>
+</div>
+
+
 
