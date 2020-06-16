@@ -7,19 +7,12 @@ import {StockService} from '../../services/stock.service';
   styleUrls: ['./line-chart.component.css']
 })
 export class LineChartComponent implements OnInit {
-  valueArray: any;
-  monthArray: any;
+  @Input() valueArray: any;
+  @Input() monthArray: any;
 
-  constructor(private stockService: StockService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.stockService.getChartData().subscribe(res => {
-      this.monthArray = Object.keys(res);
-      this.valueArray = Object.values(res);
-
-
-    });
-  }
+  ngOnInit(): void {}
 
 
 
