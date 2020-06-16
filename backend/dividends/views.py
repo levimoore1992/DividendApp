@@ -70,3 +70,10 @@ class ChartData(APIView):
                     response[month_name] += round(amount_from_stock)
 
         return Response(response)
+
+
+class DividendData(APIView):
+
+    def post(self, request, *args, **kwargs):
+        response = {}
+        return Response(response)

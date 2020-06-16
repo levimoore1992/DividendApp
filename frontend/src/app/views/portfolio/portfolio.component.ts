@@ -37,5 +37,12 @@ export class PortfolioComponent implements OnInit {
 
   submitForm() {
 
+    const payload = this.ticker;
+
+
+    this.stockService.getDividendData(payload).subscribe(res => {
+      // TODO:Get this to work
+    });
+
   }
 }

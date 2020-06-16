@@ -1,6 +1,6 @@
 from rest_framework import routers
 from django.urls import path
-from .views import DividendViewSet, DividendListViewSet, DividendScraper, Portfolio, ChartData
+from .views import DividendViewSet, DividendListViewSet, DividendScraper, Portfolio, ChartData, DividendData
 
 router = routers.DefaultRouter()
 
@@ -15,6 +15,7 @@ urlpatterns += [
     path('api/scraper', DividendScraper.as_view(), name='table-scraper'),
     path('api/portfolio', Portfolio.as_view(), name='portfolio'),
     path('api/chart-data', ChartData.as_view(), name='chart-data'),
+    path('api/dividend-data', DividendData.as_view(), name='dividend-data'),
 ]
 
 

@@ -13,6 +13,11 @@ export class StockService {
     return this.http.post('http://127.0.0.1:80/api/dividends', payload);
   }
 
+  getDividendData(payload){
+        return this.http.post('http://127.0.0.1:80/api/dividend-data', payload);
+
+  }
+
 
   getChartData() {
 
