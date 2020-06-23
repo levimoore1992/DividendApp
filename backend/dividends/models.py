@@ -21,7 +21,7 @@ class Stock(models.Model):
 
     def save(self, *args, **kwargs):
         self.ex_div_date, self.next_div_amount, self.payment_date = self.get_div_dates(self.ticker)
-        self.is_investable = .07 < float(self.dividend) / float(self.price) < .13
+        self.is_investable = .07 < float(self.dividend) / float(self.price) < .2
         if self.shares_owned > 0:
             self.is_owned = True
         super(Stock, self).save(*args, **kwargs)

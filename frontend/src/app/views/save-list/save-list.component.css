@@ -23,10 +23,10 @@ mat-card{
   border: black;
 }
 
-/*.k-grid tr.green{*/
-/*  background-color: lightgreen;*/
-/*}*/
+.k-grid tr.green{
+  background-color: lightgreen;
+}
 
-/*.k-grid tr.red{*/
-/*  background-color: lightsalmon;*/
-/*}*/
+.k-grid tr.red{
+  background-color: lightsalmon;
+}
