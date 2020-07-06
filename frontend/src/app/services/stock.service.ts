@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,18 +11,15 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   postStock(payload) {
-
-    return this.http.post('http://127.0.0.1:80/api/dividends', payload);
+    return this.http.post(`${environment.api}api/dividends`, payload);
   }
 
-  getDividendData(payload){
-        return this.http.post('http://127.0.0.1:80/api/dividend-data', payload);
-
+  getDividendData(payload) {
+        return this.http.post(`${environment.api}api/dividend-data`, payload);
   }
 
 
   getChartData() {
-
-  return this.http.get('http://127.0.0.1:80/api/chart-data');
+  return this.http.get(`${environment.api}api/chart-data`);
   }
 }
