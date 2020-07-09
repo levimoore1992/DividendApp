@@ -34,15 +34,21 @@ class Stock(models.Model):
             return self.get_etf_data(ticker)
 
         elif data['data']['exDividendDate'] != 'N/A':
-            date = datetime.strptime(data['data']['exDividendDate'], '%m/%d/%Y')
+            ex_div_date = datetime.strptime(data['data']['exDividendDate'], '%m/%d/%Y')
             payment_date = datetime.strptime(data['data']['dividendPaymentDate'], '%m/%d/%Y')
             next_div_amount = data['data']['dividends']['rows'][0]['amount'].strip('$')
-            if date < datetime.now():
+            if ex_div_date < datetime.now():
                 return None, next_div_amount, payment_date
-            correct_date = date.strftime('%Y-%m-%d')
+            correct_date = ex_div_date.strftime('%Y-%m-%d')
             return correct_date, next_div_amount, payment_date
         else:
-            return None, None, None
+            ex_div_date = datetime.strptime(data['data']['dividends']['rows'][0]['exOrEffDate'], '%m/%d/%Y')
+            payment_date = datetime.strptime(data['data']['dividends']['rows'][0]['paymentDate'], '%m/%d/%Y')
+            next_div_amount = data['data']['dividends']['rows'][0]['amount'].strip('$')
+            if ex_div_date < datetime.now():
+                return None, next_div_amount, payment_date
+            correct_date = ex_div_date.strftime('%Y-%m-%d')
+            return correct_date, next_div_amount, payment_date
 
     def get_etf_data(self, ticker):
         try:
