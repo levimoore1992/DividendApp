@@ -1,0 +1,6 @@
+{
+  "appId": "com.dividends",
+  "appName": "dividend",
+  "webDir": "www",
+  "npmClient": "npm"
+}

@@ -11,13 +11,16 @@
               <mat-label>Stock Ticker</mat-label>
               <input type="text" matInput formControlName="ticker" />
             </mat-form-field>
-            <button mat-raised-button color="warn" (click)="deleteInput(tickerIndex)">
+            <button mat-raised-button color="warn" (click)="deleteInput(tickerIndex)" class="delete-button">
               <mat-icon>close</mat-icon>
             </button>
           </div>
         </div>
-        <button mat-raised-button (click)="addInput()">Add Ticker</button>
-        <button mat-raised-button color="primary" (click)="submit()" class="submit-button">Submit</button>
+        <div class="buttons">
+          <button mat-raised-button (click)="addInput()">Add Ticker</button>
+          <button mat-raised-button color="primary" (click)="submit()" class="submit-button">Submit</button>
+        </div>
+
       </form>
     </mat-card>
   </mat-step>
