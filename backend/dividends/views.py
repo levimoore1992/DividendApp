@@ -26,7 +26,7 @@ class DividendViewSet(APIView):
 class DividendListViewSet(APIView):
 
     def get(self, request, *args, **kwargs):
-        stocks = Stock.objects.all().values()
+        stocks = Stock.objects.filter(is_owned=True).values()
 
         return Response(stocks)
 
