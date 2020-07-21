@@ -24,6 +24,8 @@ class Stock(models.Model):
         self.is_investable = .07 < float(self.dividend) / float(self.price) < .2
         if self.shares_owned > 0:
             self.is_owned = True
+        else:
+            self.is_owned = False
         super(Stock, self).save(*args, **kwargs)
 
     def get_div_dates(self, ticker):
