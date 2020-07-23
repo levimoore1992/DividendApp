@@ -15,7 +15,9 @@ class Stock(models.Model):
     ex_div_date = models.DateField(null=True, blank=True)
     payment_date = models.DateField(null=True, blank=True)
     next_div_amount = models.FloatField(null=True, blank=True)
-
+    headers = {
+        'cookie': 'ak_bmsc=20E72A11270979763019E15FB14E0DCB1736A44F8C3800009BCE195FDF6A4B4D~pl5CLirohlLftep4KFVUCxjldV2kJZwe1phGpJFFxegNukmOHzREg3ps0f/bkMe48K8NL8M1GQhJLRPps5DlBmtG0BXuSN1RPUMY4hkS3gA00Bmc+0jdiXLAje7c1TeWloivWpGTkkSuaLhSsgkjaNlmVaqEA3unwR/nGYjKwUAPHxYR+BVedplusn+E/nZU5fitdSdtITr/cwHUEYLVMMlOpnCUzK28sMQ0C+FtF/V5g=; bm_sv=34A4184E3404304D5213DD0F2D5FBD7C~X4OG3OPNszlrUcbEwz8C3jwzbVNI0MUF86gjlFsxTBrwmykxFiQC/AY24CfItDE8ZIMJbSd1HLImRim8yvwWJaPFEdXFdpi7h+6NFnA291jSoDdPgltVQj3IEk1mRIiQkZc4zuJvDQbszYN3IfG4pgYmT26q5cYt4cxUM3ldXMI='
+    }
     def __str__(self):
         return self.ticker
 
@@ -29,7 +31,9 @@ class Stock(models.Model):
         super(Stock, self).save(*args, **kwargs)
 
     def get_div_dates(self, ticker):
-        r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks')
+
+
+        r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=stocks', headers=self.headers)
         data = r.json()
 
         if not data['data']:
@@ -54,7 +58,7 @@ class Stock(models.Model):
 
     def get_etf_data(self, ticker):
         try:
-            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=etf')
+            r = requests.get(f'https://api.nasdaq.com/api/quote/{ticker}/dividends?assetclass=etf',headers=self.headers)
             response = r.json()
             data = response['data']['dividends']['rows'][0]
             next_div_amount = data['amount'].strip('$')
