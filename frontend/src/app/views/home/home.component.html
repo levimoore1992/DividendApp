@@ -1,12 +1,11 @@
 <mat-horizontal-stepper linear="true">
   <mat-step [stepControl]="stockForm" label="Enter Stock">
-    <mat-card class="card">
-      <mat-card-title>
-        Enter Stock Ticker
-      </mat-card-title>
-      <form [formGroup]="stockForm" class="stockForm">
+    <div class="card-container">
+      <mat-card class="card">
+        <mat-card-title>Enter Stock Ticker</mat-card-title>
+        <form [formGroup]="stockForm" class="stockForm">
         <div formArrayName="tickers">
-          <div *ngFor="let item of tickers.controls; let tickerIndex = index" [formGroupName]="tickerIndex">
+          <div *ngFor="let item of tickers.controls; let tickerIndex = index" [formGroupName]="tickerIndex" class="row">
             <mat-form-field>
               <mat-label>Stock Ticker</mat-label>
               <input type="text" matInput formControlName="ticker" />
@@ -20,9 +19,9 @@
           <button mat-raised-button (click)="addInput()">Add Ticker</button>
           <button mat-raised-button color="primary" (click)="submit()" class="submit-button">Submit</button>
         </div>
-
       </form>
-    </mat-card>
+      </mat-card>
+    </div>
   </mat-step>
   <mat-step label="Results" [completed]="isSubmitted">
     <div *ngIf="isSubmitted">

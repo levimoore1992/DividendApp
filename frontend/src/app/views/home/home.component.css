@@ -1,7 +1,16 @@
+.card-container{
+  display: flex;
+  justify-content: center;
+}
+
 .card{
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
+  display: inline-block;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 mat-card-title{
@@ -31,6 +40,6 @@ mat-card-title{
 
 @media only screen and (max-width: 600px){
   .card{
-    width: 75%;
+    /*width: 75%;*/
   }
 }
