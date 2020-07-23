@@ -5,8 +5,6 @@
     </mat-form-field>
   </form>
 </mat-card>
-
-
 <kendo-grid
   [data]="gridView"
   [sort]="sort"
@@ -17,43 +15,40 @@
   (sortChange)="sortChange($event)"
   *ngIf="!loading"
   [rowClass]="isInvestable"
-  filterable="menu"
+
 >
 <ng-template kendoGridToolbarTemplate>
 <button type="button" kendoGridExcelCommand icon="file-excel">Export to Excel</button>
 </ng-template>
   <kendo-grid-column field="stock_name" title="Name"></kendo-grid-column>
-
   <kendo-grid-column field="price" title="Price"></kendo-grid-column>
-
   <kendo-grid-column field="ex_div_date" title="Next Ex Div"></kendo-grid-column>
   <kendo-grid-column field="payment_date" title="Payment Date"></kendo-grid-column>
-
   <kendo-grid-column field="next_div_amount" title="Next Div Amount"></kendo-grid-column>
-
   <kendo-grid-column field="investment_needed" title="Investment Needed">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-      Total :${{ (dataItem.price * (profitWanted / dataItem.dividend)).toFixed(2)}}
-      <br> Invested : {{(dataItem.price * dataItem.shares_owned).toFixed(2)}}
-      <br> Needed: {{(dataItem.price * (profitWanted / dataItem.dividend) - (dataItem.price * dataItem.shares_owned)).toFixed(2)}}
+      <div class="mobile-off">
+        Total :${{ (dataItem.price * (profitWanted / dataItem.dividend)).toFixed(2)}}
+        <br> Invested : {{(dataItem.price * dataItem.shares_owned).toFixed(2)}}
+      </div>
+      Needed: {{(dataItem.price * (profitWanted / dataItem.dividend) - (dataItem.price * dataItem.shares_owned)).toFixed(2)}}
     </ng-template>
   </kendo-grid-column>
-
   <kendo-grid-column field="shares_needed" title="Shares Needed">
       <ng-template kendoGridCellTemplate let-dataItem="dataItem">
-    Total:{{(profitWanted / dataItem.dividend).toFixed(0) }}
-        <br> Owned: {{dataItem.shares_owned}}
-        <br> Needed: {{((profitWanted / dataItem.dividend) - dataItem.shares_owned).toFixed(0)}}
+        <div class="mobile-off">
+              Total:{{(profitWanted / dataItem.dividend).toFixed(0) }}
+                  <br> Owned: {{dataItem.shares_owned}}
+        </div>
+        Needed: {{((profitWanted / dataItem.dividend) - dataItem.shares_owned).toFixed(0)}}
   </ng-template>
   </kendo-grid-column>
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
-
   <kendo-grid-column  title="Return %" field="return">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
       {{((dataItem.dividend / dataItem.price) * 100).toFixed(2) }}%
     </ng-template>
   </kendo-grid-column>
-
   <kendo-grid-column field="last_updated" title="Last Updated">
     <ng-template kendoGridCellTemplate let-dataItem="dataItem">
       {{dataItem.last_updated | date : 'short'}}
@@ -64,9 +59,7 @@
       <button mat-raised-button (click)="updateStock(dataItem.ticker)">Update</button>
     </ng-template>
   </kendo-grid-column>
-
   <kendo-grid-excel fileName="Dividends.xlsx"></kendo-grid-excel>
-
   <ng-template kendoGridDetailTemplate let-dataItem>
     <section>
       <table>
@@ -86,7 +79,6 @@
     </section>
   </ng-template>
 </kendo-grid>
-
 <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
 
 

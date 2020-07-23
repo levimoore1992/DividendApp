@@ -1,20 +1,19 @@
-.stock-save-form{
-
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
-}
-mat-card{
-    margin-left: auto;
-  margin-right: auto;
-  max-width: 300px;
-}
-
 .spinner{
   margin-right: auto;
   margin-left: auto;
 }
 
+.stock-save-form{
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 300px;
+}
 
 .profit-wanted{
   max-width: 300px;
@@ -23,6 +22,8 @@ mat-card{
   border: black;
 }
 
+
+
 .k-grid tr.green{
   background-color: lightgreen;
 }
@@ -30,3 +31,16 @@ mat-card{
 .k-grid tr.red{
   background-color: lightsalmon;
 }
+
+@media only screen and (max-width: 600px){
+  .mobile-off{
+    display: none;
+  }
+  th{
+    width: 75px
+  }
+  td{
+    width: 75px
+  }
+}
+
