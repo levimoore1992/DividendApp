@@ -2,7 +2,7 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {StockListService} from '../../services/stock-list.service';
 import {orderBy, SortDescriptor} from '@progress/kendo-data-query';
 import {GridDataResult, RowClassArgs} from '@progress/kendo-angular-grid';
-import {StockService} from "../../services/stock.service";
+import {StockService} from '../../services/stock.service';
 
 @Component({
   selector: 'app-save-list',

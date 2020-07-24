@@ -26,7 +26,7 @@ class DividendViewSet(APIView):
 class DividendListViewSet(APIView):
 
     def get(self, request, *args, **kwargs):
-        stocks = Stock.objects.filter(is_owned=True).values()
+        stocks = Stock.objects.all().values()
 
         return Response(stocks)
 
@@ -76,4 +76,22 @@ class DividendData(APIView):
 
     def post(self, request, *args, **kwargs):
         response = {}
-        return Response(response)
+        ticker = request.data['ticker']
+        count = request.data['count']
+
+        stocks = Stock.objects.all()
+        if ticker in stocks.values_list('ticker', flat=True):
+            qs = stocks.filter(ticker=ticker).first()
+            if qs.payment_date:
+                model_payment_date = qs.payment_date
+                formatted_date = datetime.strptime(str(model_payment_date), '%Y-%m-%d')
+                month_index = formatted_date.month
+                month_name = calendar.month_name[month_index]
+                amount_from_stock = qs.next_div_amount * count
+                response['month'] = month_name
+                response['amount'] = round(amount_from_stock)
+                return Response(response)
+            else:
+                return Response({'message': 'Stock doesnt have a payment date yet'}, status=200)
+        else:
+            return Response({'message': 'Stock not in database'}, status=200)

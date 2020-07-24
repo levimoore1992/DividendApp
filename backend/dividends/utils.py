@@ -31,7 +31,7 @@ def get_stock_data(ticker):
             created.save()
         return {'stock_name': name}
     except:
-        return {'error': 'Couldnt return stock'}
+        raise Exception({'error': 'Couldnt return stock'})
 
 def get_dividend(response_data):
     data = response_data['data']['dividends']['rows']

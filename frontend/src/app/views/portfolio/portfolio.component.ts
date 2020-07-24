@@ -9,8 +9,8 @@ import {StockService} from '../../services/stock.service';
 })
 export class PortfolioComponent implements OnInit {
   simulationForm: FormGroup;
-  valueArray: any;
-  monthArray: any;
+  valueArray: string[];
+  monthArray: string[];
   constructor(private fb: FormBuilder, private stockService: StockService) { }
 
 
@@ -37,11 +37,19 @@ export class PortfolioComponent implements OnInit {
 
   submitForm() {
 
-    const payload = this.ticker;
+    const payload = {
+        ticker: this.ticker,
+        count: this.shares
+      };
 
 
     this.stockService.getDividendData(payload).subscribe(res => {
-      // TODO:Get this to work
+      const {month, amount} = res;
+
+      const index  = this.monthArray.indexOf(month);
+
+      this.valueArray[index] += amount;
+
     });
 
   }

@@ -15,7 +15,7 @@ export class StockService {
   }
 
   getDividendData(payload) {
-        return this.http.post(`${environment.api}api/dividend-data`, payload);
+        return this.http.post<{amount: number, month: string}>(`${environment.api}api/dividend-data`, payload);
   }
 
 
