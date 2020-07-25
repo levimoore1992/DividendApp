@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_HOST=ec2-34-239-241-25.compute-1.amazonaws.com
+      - POSTGRES_DB=d94vmr50q7vjed
+      - POSTGRES_USER=faqmgbugpgitfb
+      - POSTGRES_PASSWORD=f9fa9319b5e7d79054e23b0e3655c43adf6147b331bf5145fec26ad3e7dd13d3
+    ports:
+      - "5432:5432"
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=dev@localhost
+      - PGADMIN_DEFAULT_PASSWORD=password
+  dj-dividend:
+    container_name: dividend
+    build: backend
+    command: bash -c " python manage.py wait_for_db && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=app
+      - DB_USER=postgres
+      - DB_PASS=supersecretpassword
+    volumes:
+      - ./backend:/code
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - "./frontend:/app"
+      - "node_modules:/app/node_modules"
+    command: ng serve --proxy-config proxy.conf.js --live-reload true --host 0.0.0.0 --disable-host-check --poll 1
+
+volumes:
+  db:
+  node_modules:
