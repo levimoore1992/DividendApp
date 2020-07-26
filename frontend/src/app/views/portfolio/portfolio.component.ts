@@ -11,6 +11,7 @@ export class PortfolioComponent implements OnInit {
   simulationForm: FormGroup;
   valueArray: string[];
   monthArray: string[];
+  ownedStocks;
   constructor(private fb: FormBuilder, private stockService: StockService) { }
 
 
@@ -25,6 +26,8 @@ export class PortfolioComponent implements OnInit {
       ticker: [null, Validators.required],
       shares: [null, Validators.required],
     });
+
+    this.getAllOwnedStocks();
   }
 
   get ticker() {
@@ -35,6 +38,12 @@ export class PortfolioComponent implements OnInit {
     return this.simulationForm.get('shares').value;
   }
 
+  getAllOwnedStocks() {
+    this.stockService.getOwnedStocks().subscribe(res => {
+      this.ownedStocks = res;
+    });
+  }
+
   submitForm() {
 
     const payload = {
@@ -42,6 +51,23 @@ export class PortfolioComponent implements OnInit {
         count: this.shares
       };
 
+
+    this.stockService.getDividendData(payload).subscribe(res => {
+      const {month, amount} = res;
+
+      const index  = this.monthArray.indexOf(month);
+
+      this.valueArray[index] += amount;
+
+    });
+
+  }
+
+  submitStock(ticker: string, count: any) {
+    const payload = {
+      ticker,
+      count: parseInt(count.value)
+    };
 
     this.stockService.getDividendData(payload).subscribe(res => {
       const {month, amount} = res;

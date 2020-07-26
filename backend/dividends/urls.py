@@ -1,10 +1,11 @@
 from rest_framework import routers
 from django.urls import path
-from .views import DividendViewSet, DividendListViewSet, DividendScraper, Portfolio, ChartData, DividendData, CalendarData
+from .views import DividendViewSet, DividendListViewSet, DividendScraper, Portfolio, ChartData, DividendData, CalendarData, OwnedStocks
 
 router = routers.DefaultRouter()
 
 urlpatterns = router.urls
+
 
 
 
@@ -17,6 +18,7 @@ urlpatterns += [
     path('api/chart-data', ChartData.as_view(), name='chart-data'),
     path('api/dividend-data', DividendData.as_view(), name='dividend-data'),
     path('api/calendar-data', CalendarData.as_view(), name='calendar-data'),
+    path('api/owned-stocks', OwnedStocks.as_view(), name='owned-stocks'),
 ]
 
 

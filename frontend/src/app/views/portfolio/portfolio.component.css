@@ -12,3 +12,26 @@
 .simulation-form > * {
   width: 250px;
 }
+
+.card-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.card-container > * {
+  margin: 10px;
+}
+
+.ticker-card{
+  width: 100px;
+
+}
+
+.ticker-card > * {
+  margin: 5px;
+}
+.title{
+margin-left: auto;
+  margin-right: auto;
+}
