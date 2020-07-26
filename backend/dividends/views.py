@@ -97,10 +97,45 @@ class DividendData(APIView):
             return Response({'message': 'Stock not in database'}, status=200)
 
 
+def change_color(html_day):
+    return html_day.replace("dummy-class", "bg-orange")
+
+
 class CalendarData(APIView):
 
     def get(self, request, *args, **kwargs):
-        html = calendar.HTMLCalendar()
-        month = html.formatmonth(2020, 1)
+        months_set = set()
+        calendars = []
 
-        return Response(month)
+        qs = Stock.objects.filter(is_owned=True)
+
+        for item in qs:
+            formatted_month = datetime.strptime(str(item.payment_date), '%Y-%m-%d')
+            month_index = formatted_month.month
+            year_index = formatted_month.year
+            months_set.add((month_index, year_index))
+
+        sorted_months = sorted(months_set)
+        for month in sorted_months:
+            html = calendar.HTMLCalendar()
+
+            html.cssclasses = [
+                "dummy-class u-white-background ",
+                "dummy-class u-white-background ",
+                "dummy-class u-white-background ",
+                "dummy-class u-white-background ",
+                "dummy-class u-white-background ",
+                "dummy-class u-white-background ",
+                "dummy-class u-white-background ",
+            ]
+
+            html_month = html.formatmonth(month[1], month[0])
+
+            for stock in qs.filter(payment_date__month=month[0]):
+
+                html_day = html.formatday(stock.payment_date.day, stock.payment_date.isoweekday() - 1)
+                html_month = html_month.replace(html_day, change_color(html_day))
+            calendars.append(html_month)
+
+        stringified = " ".join(str(x) for x in calendars)
+        return Response(stringified)
