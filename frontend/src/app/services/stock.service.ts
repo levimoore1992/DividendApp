@@ -22,4 +22,17 @@ export class StockService {
   getChartData() {
   return this.http.get(`${environment.api}api/chart-data`);
   }
+
+  getCalendarData() {
+
+    const headers = {
+      'Content-Type': 'text/html'
+    };
+
+    const requestOptions = {
+      headers: new HttpHeaders(headers)
+    };
+
+    return this.http.get(`${environment.api}api/calendar-data`, requestOptions);
+  }
 }

@@ -2,3 +2,21 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.month{
+  margin: 25px;
+  border: 1px solid #ddd;
+
+}
+
+.month td{
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.bg-orange{
+  background-color: orange;
+}
+
+
+
