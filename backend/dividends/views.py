@@ -78,7 +78,6 @@ class DividendData(APIView):
         response = {}
         ticker = request.data['ticker']
         count = request.data['count']
-
         stocks = Stock.objects.all()
         if ticker in stocks.values_list('ticker', flat=True):
             qs = stocks.filter(ticker=ticker).first()
@@ -139,3 +138,11 @@ class CalendarData(APIView):
 
         stringified = " ".join(str(x) for x in calendars)
         return Response(stringified)
+
+
+class OwnedStocks(APIView):
+
+    def get(self, request, *args, **kwargs):
+        stocks = Stock.objects.filter(is_owned=True).values()
+
+        return Response(stocks)

@@ -15,7 +15,20 @@
   </form>
 </mat-card>
 <app-line-chart [monthArray]="monthArray" [valueArray]="valueArray"></app-line-chart>
+    <h3 class="title">Stocks Already Owned</h3>
+
+  <div class="card-container">
+  <mat-card *ngFor="let stock of ownedStocks" class="ticker-card">
+    <mat-label>Ticker</mat-label>
+    <input type="text" matInput [value]="stock.ticker">
+    <input type="number" matInput #shareCount [value]="stock.shares_owned">
+    <button mat-raised-button (click)="submitStock(stock.ticker, shareCount)">Submit</button>
+  </mat-card>
 </div>
+
+</div>
+
+
 
 
 

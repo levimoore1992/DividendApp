@@ -35,4 +35,8 @@ export class StockService {
 
     return this.http.get(`${environment.api}api/calendar-data`, requestOptions);
   }
+
+  getOwnedStocks() {
+    return this.http.get(`${environment.api}api/owned-stocks`);
+  }
 }
