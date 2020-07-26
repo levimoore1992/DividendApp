@@ -24,6 +24,7 @@ import { PortfolioComponent } from './views/portfolio/portfolio.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import 'hammerjs';
+import {CalendarComponent} from './views/calendar/calendar.component';
 
 
 
@@ -37,7 +38,8 @@ import 'hammerjs';
     SaveListComponent,
     GetDividendTablePipe,
     PortfolioComponent,
-    LineChartComponent
+    LineChartComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,

@@ -95,3 +95,12 @@ class DividendData(APIView):
                 return Response({'message': 'Stock doesnt have a payment date yet'}, status=200)
         else:
             return Response({'message': 'Stock not in database'}, status=200)
+
+
+class CalendarData(APIView):
+
+    def get(self, request, *args, **kwargs):
+        html = calendar.HTMLCalendar()
+        month = html.formatmonth(2020, 1)
+
+        return Response(month)
