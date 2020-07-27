@@ -3,19 +3,32 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.month{
-  margin: 25px;
-  border: 1px solid #ddd;
-
-}
-
-.month td{
-    border: 1px solid #ddd;
-    text-align: center;
-}
 
 .bg-orange{
   background-color: orange;
+}
+
+.month {
+    width: 250px;
+    margin: 25px;
+  border: 1px solid #ddd;
+}
+
+.month .calendar-weekdays {
+    width: 30px;
+    text-align: center;
+}
+
+.month td,
+.month th {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.calendar-month {
+    padding-bottom: 10px;
 }
 
 

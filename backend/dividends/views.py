@@ -26,7 +26,7 @@ class DividendViewSet(APIView):
 class DividendListViewSet(APIView):
 
     def get(self, request, *args, **kwargs):
-        stocks = Stock.objects.all().values()
+        stocks = Stock.objects.filter(ex_div_date__gte=datetime.today()).values()
 
         return Response(stocks)
 
@@ -106,7 +106,7 @@ class CalendarData(APIView):
         months_set = set()
         calendars = []
 
-        qs = Stock.objects.filter(is_owned=True)
+        qs = Stock.objects.filter(is_owned=True, payment_date__gte=datetime.today())
 
         for item in qs:
             formatted_month = datetime.strptime(str(item.payment_date), '%Y-%m-%d')
