@@ -3,4 +3,16 @@
   flex-direction: row;
 }
 
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+mat-card{
+  width: 300px;
+}
+
+kendo-datepicker, mat-spinner, mat-card{
+  margin: 25px;
+}

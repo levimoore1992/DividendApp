@@ -1,2 +1,23 @@
 <div [innerHTML]="calendarHTML" class="calendar-input">
 </div>
+
+<kendo-datepicker
+    (valueChange)="onChange($event)"
+    [value]="value"
+></kendo-datepicker>
+
+<div *ngIf="showRows" >
+  <mat-spinner *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading">
+    <div class="container">
+      <mat-card *ngFor="let stock of stockList">
+        <mat-card-title>{{stock.companyName}}</mat-card-title>
+        <mat-card-subtitle>{{stock.symbol}}</mat-card-subtitle>
+        <mat-card-content>{{stock.dividend_Rate}}</mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="addToStocks(stock.symbol)">Add To Stocks</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
