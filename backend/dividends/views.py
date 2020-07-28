@@ -131,7 +131,6 @@ class CalendarData(APIView):
             html_month = html.formatmonth(month[1], month[0])
 
             for stock in qs.filter(payment_date__month=month[0]):
-
                 html_day = html.formatday(stock.payment_date.day, stock.payment_date.isoweekday() - 1)
                 html_month = html_month.replace(html_day, change_color(html_day))
             calendars.append(html_month)
@@ -146,3 +145,17 @@ class OwnedStocks(APIView):
         stocks = Stock.objects.filter(is_owned=True).values()
 
         return Response(stocks)
+
+
+class PaymentDayView(APIView):
+
+
+    def post(self, request, *args, **kwargs):
+        headers = {
+            'cookie': 'ak_bmsc=20E72A11270979763019E15FB14E0DCB1736A44F8C3800009BCE195FDF6A4B4D~pl5CLirohlLftep4KFVUCxjldV2kJZwe1phGpJFFxegNukmOHzREg3ps0f/bkMe48K8NL8M1GQhJLRPps5DlBmtG0BXuSN1RPUMY4hkS3gA00Bmc+0jdiXLAje7c1TeWloivWpGTkkSuaLhSsgkjaNlmVaqEA3unwR/nGYjKwUAPHxYR+BVedplusn+E/nZU5fitdSdtITr/cwHUEYLVMMlOpnCUzK28sMQ0C+FtF/V5g=; bm_sv=34A4184E3404304D5213DD0F2D5FBD7C~X4OG3OPNszlrUcbEwz8C3jwzbVNI0MUF86gjlFsxTBrwmykxFiQC/AY24CfItDE8ZIMJbSd1HLImRim8yvwWJaPFEdXFdpi7h+6NFnA291jSoDdPgltVQj3IEk1mRIiQkZc4zuJvDQbszYN3IfG4pgYmT26q5cYt4cxUM3ldXMI='
+        }
+
+        date = request.data['date']
+        request = requests.get(f'https://api.nasdaq.com/api/calendar/dividends?date={date}', headers=headers).json()
+        response = request['data']['calendar']['rows']
+        return Response(response)

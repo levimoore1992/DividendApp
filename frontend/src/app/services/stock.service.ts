@@ -39,4 +39,12 @@ export class StockService {
   getOwnedStocks() {
     return this.http.get(`${environment.api}api/owned-stocks`);
   }
+
+
+  getDateData(date) {
+    const payload = {
+      date
+    }
+    return this.http.post(`${environment.api}api/payment-day`, payload);
+  }
 }
