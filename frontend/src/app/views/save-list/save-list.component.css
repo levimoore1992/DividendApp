@@ -22,6 +22,10 @@ mat-card{
   border: black;
 }
 
+.red-text{
+  color: red;
+}
+
 
 
 .k-grid tr.green{

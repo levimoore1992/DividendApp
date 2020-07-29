@@ -31,7 +31,7 @@
         Total :${{ (dataItem.price * (profitWanted / dataItem.dividend)).toFixed(2)}}
         <br> Invested : {{(dataItem.price * dataItem.shares_owned).toFixed(2)}}
       </div>
-      Needed: {{(dataItem.price * (profitWanted / dataItem.dividend) - (dataItem.price * dataItem.shares_owned)).toFixed(2)}}
+      <div class="red-text">Needed: {{(dataItem.price * (profitWanted / dataItem.dividend) - (dataItem.price * dataItem.shares_owned)).toFixed(2)}}</div>
     </ng-template>
   </kendo-grid-column>
   <kendo-grid-column field="shares_needed" title="Shares Needed">
@@ -40,7 +40,7 @@
               Total:{{(profitWanted / dataItem.dividend).toFixed(0) }}
                   <br> Owned: {{dataItem.shares_owned}}
         </div>
-        Needed: {{((profitWanted / dataItem.dividend) - dataItem.shares_owned).toFixed(0)}}
+        <div class="red-text">Needed: {{((profitWanted / dataItem.dividend) - dataItem.shares_owned).toFixed(0)}}</div>
   </ng-template>
   </kendo-grid-column>
   <kendo-grid-column field="ticker" title="Ticker"></kendo-grid-column>
