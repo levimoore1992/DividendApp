@@ -33,7 +33,7 @@ export class CalendarComponent implements OnInit {
   handleDate(data) {
     let month = data.getMonth() + 1;
     month  = month.toString().length < 2 ? `0${month}` : month;
-    let day = data.getDay();
+    let day = data.getDate();
     day  = day.toString().length < 2 ? `0${day}` : day;
     const year = data.getFullYear();
     return year + '-' + month + '-' + day;
