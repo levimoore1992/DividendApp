@@ -23,10 +23,10 @@ import { GetDividendTablePipe } from './pipes/get-dividend-table.pipe';
 import { PortfolioComponent } from './views/portfolio/portfolio.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { ChartsModule } from '@progress/kendo-angular-charts';
-import 'hammerjs';
 import {CalendarComponent} from './views/calendar/calendar.component';
-import {CalendarModule, DatePickerModule} from "@progress/kendo-angular-dateinputs";
-
+import {CalendarModule, DatePickerModule} from '@progress/kendo-angular-dateinputs';
+import {SchedulerComponent} from './views/scheduler/scheduler.component';
+import 'hammerjs';
 
 
 
@@ -40,7 +40,8 @@ import {CalendarModule, DatePickerModule} from "@progress/kendo-angular-dateinpu
     GetDividendTablePipe,
     PortfolioComponent,
     LineChartComponent,
-    CalendarComponent
+    CalendarComponent,
+    SchedulerComponent
   ],
   imports: [
     BrowserModule,
