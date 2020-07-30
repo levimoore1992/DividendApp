@@ -13,7 +13,7 @@
       <mat-card *ngFor="let stock of stockList">
         <mat-card-title>{{stock.stock_name}}</mat-card-title>
         <mat-card-subtitle>Ticker: {{stock.ticker}}</mat-card-subtitle>
-        <mat-card-content>Next Dividend: {{stock.next_div_amount}}</mat-card-content>
+        <mat-card-content>Next Dividend: {{stock.next_div_amount}} <br>Exdiv Date: {{stock.ex_div_date ? stock.ex_div_date : 'Passed'}}</mat-card-content>
       </mat-card>
     </div>
   </div>
