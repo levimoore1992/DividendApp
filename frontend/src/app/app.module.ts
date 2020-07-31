@@ -25,7 +25,6 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import {CalendarComponent} from './views/calendar/calendar.component';
 import {CalendarModule, DatePickerModule} from '@progress/kendo-angular-dateinputs';
-import {SchedulerComponent} from './views/scheduler/scheduler.component';
 import 'hammerjs';
 
 
@@ -41,7 +40,6 @@ import 'hammerjs';
     PortfolioComponent,
     LineChartComponent,
     CalendarComponent,
-    SchedulerComponent
   ],
   imports: [
     BrowserModule,
