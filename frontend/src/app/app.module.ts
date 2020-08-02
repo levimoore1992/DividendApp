@@ -26,6 +26,7 @@ import { ChartsModule } from '@progress/kendo-angular-charts';
 import {CalendarComponent} from './views/calendar/calendar.component';
 import {CalendarModule, DatePickerModule} from '@progress/kendo-angular-dateinputs';
 import 'hammerjs';
+import {ButtonModule} from "@progress/kendo-angular-buttons";
 
 
 
@@ -63,7 +64,8 @@ import 'hammerjs';
     ExcelModule,
     ChartsModule,
     CalendarModule,
-    DatePickerModule
+    DatePickerModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
