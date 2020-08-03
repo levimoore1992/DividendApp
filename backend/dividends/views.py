@@ -26,7 +26,7 @@ class DividendViewSet(APIView):
 class DividendListViewSet(APIView):
 
     def get(self, request, *args, **kwargs):
-        stocks = Stock.objects.filter(ex_div_date__gte=datetime.today()).values()
+        stocks = Stock.objects.all().values()
 
         return Response(stocks)
 
