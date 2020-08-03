@@ -9,3 +9,5 @@ django-background-tasks
 pandas
 xlrd
 bs4
+gunicorn
+django-heroku
