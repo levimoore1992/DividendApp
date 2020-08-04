@@ -16,7 +16,9 @@ export class SaveListComponent implements OnInit {
     field: 'ex_div_date',
     dir: 'desc'
   }];
-  stocks: [{stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number, is_owned: boolean}];
+  stocks: [{
+    is_investable: boolean;
+    stock_name: string, price: number, ticker: string, investment_needed: number, shares_need: number, is_owned: boolean}];
 
   gridView: GridDataResult;
   loading;
@@ -37,10 +39,8 @@ export class SaveListComponent implements OnInit {
   }
 
       filterOwnedStocks() {
-        this.gridView = {
-          data: orderBy(this.stocks.filter(item => item.is_owned === true), this.sort),
-          total: this.stocks.length
-        };
+    this.gridView.data = this.gridView.data.filter(item => item.is_owned === true);
+
       }
 
       sortChange(sort: SortDescriptor[]): void {
@@ -55,20 +55,16 @@ export class SaveListComponent implements OnInit {
         };
     }
 
-    isInvestable(context: RowClassArgs) {
-    const row = context.dataItem.is_investable;
-    return {
-      green: row,
-      red: !row
-    };
-
-    }
-
 
   updateStock(ticker: string) {
     const payload = {
       ticker
     };
     this.service.postStock(payload).subscribe();
+  }
+
+  filterInvestableStocks() {
+        this.gridView.data = this.gridView.data.filter(item => item.is_investable === true);
+
   }
 }
